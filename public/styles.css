@@ -1,3 +1,4 @@
+/* home page */
 body{
     margin: 0px;
     background-color: #9ad9db;
@@ -125,4 +126,282 @@ body{
         padding: 20px;
     }
   
+  }
+
+
+
+
+
+
+
+
+/************************ 
+  login page
+  **************************/
+  p{
+    font-size:12px;
+    text-decoration: none;
+    color:black;
+  }
+  
+  h1{
+    font-size:1.5em;
+    text-align: left;
+    color:black;
+  }
+  
+  .box{
+    background:#e5dbd9;
+    width:300px;
+    border-radius:6px;
+    margin: 0 auto 0 auto;
+    padding:0px 10px 70px 20px;
+    border: #ba9a93 4px solid; 
+  }
+  
+  .email{
+    background:#ecf0f1;
+    border: #ccc 1px solid;
+    border-bottom: #ccc 2px solid;
+    padding: 8px;
+    width:250px;
+    color:#AAAAAA;
+    margin-top:10px;
+    font-size:1em;
+    border-radius:4px;
+  }
+  
+  .password{
+    border-radius:4px;
+    background:#ecf0f1;
+    border: #ccc 1px solid;
+    padding: 8px;
+    width:250px;
+    font-size:1em;
+  }
+  
+  .sign_in_btn{
+    background:#eb96aa;
+    width:100px;
+    padding-top:5px;
+    padding-bottom:5px;
+    color:white;
+    text-align: center;
+    border-radius:4px;
+    border: #b4687a 1px solid;
+    
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-left: 20px;
+    float:left;
+    font-size:16px;
+    font: size 16px;em;
+  }
+  
+  .sign_in_btn:hover{
+    background:#b4687a; 
+  }
+  
+  #sign_up_btn{
+    float:left;
+    background:#9ad9db;
+    width:100px;  padding-top:5px;
+    padding-bottom:5px;
+    color:white;
+    border-radius:4px;
+    text-align: center;
+    border: #59a7aa 1px solid;
+    
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-left:10px;
+    font-size:16px;
+  }
+  
+  #sign_up_btn:hover{ 
+  background:#59a7aa; 
+  }
+
+/************************ 
+  All Deals page
+  **************************/
+  
+  figure {
+    margin: 0;
+    padding: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+  
+  article img {
+    max-width: 100%;
+    transform-origin: center;
+    transform: scale(var(--img-scale));
+    transition: transform 0.4s ease-in-out;
+  }
+  
+  .article-body {
+    padding: 24px;
+  }
+  
+  article a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #28666e;
+  }
+  
+  article a:focus {
+    outline: 1px dotted #28666e;
+  }
+  
+  article a .icon {
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    margin-left: 5px;
+    transform: translateX(var(--link-icon-translate));
+    opacity: var(--link-icon-opacity);
+    transition: all 0.3s;
+  }
+  
+  /* using the has() relational pseudo selector to update our custom properties */
+  article:has(:hover, :focus) {
+    --img-scale: 1.1;
+    --title-color: #28666e;
+    --link-icon-translate: 0;
+    --link-icon-opacity: 1;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+  
+  
+  /************************ 
+  Generic layout (demo looks)
+  **************************/
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  .articles {
+    display: grid;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  
+  @media screen and (max-width: 960px) {
+    article {
+      container: card/inline-size;
+    }
+    .article-body p {
+      display: none;
+    }
+  }
+  
+  @container card (min-width: 380px) {
+    .article-wrapper {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+    }
+    .article-body {
+      padding-left: 0;
+    }
+    figure {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    figure img {
+      height: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+  }
+  
+  .sr-only:not(:focus):not(:active) {
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; 
+    width: 1px;
+  }
+
+
+/************************ 
+  Sign Up page
+  **************************/
+
+.sign_up_container_content{ 
+  background-color: #e5dbd9;
+  width:500px;
+  height:500px;
+}
+img{
+  width: 100%;
+  height: 25%;
+}
+.form-title{
+  padding:10px 40px 0px;
+}
+form{
+  padding:0px 40px;
+}
+input[type=text], [type=email]{
+  border: none;
+  border-bottom: 1px solid black;
+  outline:none;
+  width:100%;
+  margin: 8px 0;
+  padding:10px 0;
+}
+input[type=number]{
+  border: none;
+  border-bottom: 1px solid black;
+  outline:none;
+  margin: 8px 0;
+  padding:5px 0;
+}
+input :hover {
+  background-color: red;
+}
+select{
+  border: none;
+  border-bottom: 1px solid black;
+  outline:none;
+  margin: 8px 0;
+  padding:5px 0;
+  width:50%;
+}
+.beside{
+  display:flex;  
+  justify-content: space-between;
+}
+button{
+  color:#ffffff;
+  background-color: #eb96aa;
+  height:40px;
+  width:25%;
+  margin-top:15px;
+  cursor: pointer;
+  border:none;
+  border-radius:2%;
+  outline:none;
+  text-align:center;
+  font-size:16px;
+  text-decoration:none;
+  -webkit-transition-duration:0.4s;
+  transition-duration:0.4s;
+  border: #b4687a 1px solid;
+  
+}
+button:hover{
+    background:#b4687a; 
   }
