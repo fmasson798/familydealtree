@@ -69,6 +69,11 @@ body{
   nav li a:hover {
     background-color: #218b82;
   }
+
+.topnav a.active {
+  background-color: #98d4bb;
+  color: #218b82;
+}
   
   .contact{
     width: 95%;
@@ -195,7 +200,7 @@ body{
     margin-left: 20px;
     float:left;
     font-size:16px;
-    font: size 16px;em;
+    font: size 16em;
   }
   
   .sign_in_btn:hover{
