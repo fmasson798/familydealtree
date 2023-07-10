@@ -422,6 +422,7 @@ button:hover{
   .card_container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .card {
@@ -448,4 +449,31 @@ button:hover{
 
   .card_3 {
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5FFyWIKrrXXue7vmknVH8LfXPdiM97Xjjw&usqp=CAU')
+  }
+
+  .card h2 {
+    padding: 10px;
+  }
+
+  .card p {
+    padding: 10px;
+  }
+
+  .card a {
+    background-color: #eb96aa;
+    color: white;
+    padding: 15px 20px;
+    display: block;
+    text-align: center;
+    margin: 20px 0px;
+    border-radius: 0 0 15px 15px;
+    text-decoration: none;
+  }
+
+  .card:hover {
+    background-color: #eb96aa;
+    color: #b4687a;
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 1s ease;
   }
