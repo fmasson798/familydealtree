@@ -41,10 +41,22 @@ app.get("/views/home.ejs", (req, res) => {
     res.render('user');
 });
 
- //route for card button in footer - TO BE REMOVED
+ //route for card in footer - TO BE REMOVED
  app.get("/views/card.ejs", (req, res) => {
     res.render('card');
 });
+
+ //route for pill button in footer - TO BE REMOVED
+ app.get("/views/pill_button.ejs", (req, res) => {
+    res.render('pill_button');
+});
+
+
+
+
+
+
+
 
 app.listen(process.env.PORT || 3000, ()=>{ 
     console.log("server started on: localhost:3000");

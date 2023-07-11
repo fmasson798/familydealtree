@@ -6,21 +6,25 @@
 body{
     margin: 0px;
     background-color: #9ad9db;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
   
   }
   header{
     background-color: #218b82;
     padding: 10px;
   }
+  
   .title{
     font-size: 2em;
     color: aliceblue;
   }
-  .container{
-    width:80%;
-    margin: 0 auto;
-    margin-top: 20px;
+  .home_container{
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    padding: auto;
+    margin: auto;
+    margin-top: 5px;
   }
   
   .content{
@@ -78,10 +82,39 @@ body{
   background-color: #98d4bb;
   color: #218b82;
 }
+
+.search_bar {
+  float:left;
+  font-size: 16pt;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top:5px;
+  padding-bottom:5px;
+  border-radius: 15px;
+  border-color:white;
+  border-left: white;
+  border-top: white;
+  text-align: center;
+  margin: 10px;
+  border: #218b82 1px solid;
+
+}
+
+.search_button {
+  float:left;
+  background:#eb96aa;
+  width:100px;
+  padding-top:5px;
+  padding-bottom:5px;
+  color:white;
+  text-align: center;
+  border-radius: 15px;
+  margin: 10px;
+  border: #b4687a 1px solid;
+}
   
   .contact{
     width: 95%;
-    border: thin solid gray;
+    border: thick solid gray;
     padding-right: 0px;
     padding-left: 10px;
     padding-bottom: 15px;
@@ -98,21 +131,19 @@ body{
   @media screen and (max-width:1000px){
     .container{
         width: 95%;
+       
     }
   }
   
   @media screen and (max-width:841px){
     .contact{
-        /*width: 90%;*/
-        border: thin solid gray;
+        border: thin solid black;
         padding: 20px 10px 20px 20px;
     }
     .side{
-        width: 70%;
-        height: 250px;
-        overflow: hidden;
-        float:none;
-        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        max-width: 400px;
     }
     .contenttext{
         width:90%;
@@ -126,10 +157,11 @@ body{
   
   }
   
+  /*This is the lines between the buttons in the navigation*/
   @media screen and (max-width:600px){
     nav li{
         float:none;
-        border-bottom: thin solid white;
+        border-bottom: none;
     }
     header{
         padding: 20px;
@@ -154,34 +186,33 @@ body{
   }
   
   h1{
-    font-size:1.5em;
+    font-size:20px;
     text-align: left;
     color:black;
   }
   
   .box{
-    background:#e5dbd9;
+    background:#98d4bb;
     width:300px;
-    border-radius:6px;
-    margin: 0 auto 0 auto;
+    border-radius: 15px;
     padding:0px 10px 70px 20px;
-    border: #ba9a93 4px solid; 
+    margin: 20px ;
   }
   
   .email{
     background:#ecf0f1;
     border: #ccc 1px solid;
     border-bottom: #ccc 2px solid;
-    padding: 8px;
+    padding: 20px;
     width:250px;
     color:#AAAAAA;
     margin-top:10px;
     font-size:1em;
-    border-radius:4px;
+    border-radius: 15px;
   }
   
   .password{
-    border-radius:4px;
+    border-radius: 15px;
     background:#ecf0f1;
     border: #ccc 1px solid;
     padding: 8px;
@@ -196,7 +227,7 @@ body{
     padding-bottom:5px;
     color:white;
     text-align: center;
-    border-radius:4px;
+    border-radius: 15px;
     border: #b4687a 1px solid;
     
     margin-top:20px;
@@ -217,7 +248,7 @@ body{
     width:100px;  padding-top:5px;
     padding-bottom:5px;
     color:white;
-    border-radius:4px;
+    border-radius: 15px;
     text-align: center;
     border: #59a7aa 1px solid;
     
@@ -352,47 +383,86 @@ body{
   background-color: #e5dbd9;
   width:500px;
   height:500px;
+  border-radius: 15px;
+ 
+  
+
 }
 img{
   width: 100%;
   height: 25%;
+  border-radius: 15px;
+
 }
 .form-title{
-  padding:10px 40px 0px;
+  padding:10px;
+
 }
 form{
-  padding:0px 40px;
+  padding:10px;
+
 }
+
+/*This is for email and username*/
 input[type=text], [type=email]{
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #28666e;
   outline:none;
   width:100%;
   margin: 8px 0;
-  padding:10px 0;
+  padding:10px;
+  border-radius: 15px;
 }
 input[type=number]{
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #28666e;
   outline:none;
   margin: 8px 0;
-  padding:5px 0;
+  padding: 10px;
+  border-radius: 15px;
+
 }
+
+input[type=password]{
+  border: none;
+  border-bottom: 1px solid #28666e;
+  outline:none;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+input[type=date]{
+  border: none;
+  border-bottom: 1px solid #28666e;
+  outline:none;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 15px;
+}
+
 input :hover {
   background-color: red;
 }
+
+/*This is for gender and nationality*/
 select{
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #28666e;
   outline:none;
   margin: 8px 0;
-  padding:5px 0;
+  padding: 10px;
   width:50%;
+  border-radius: 15px;
+
 }
 .beside{
   display:flex;  
   justify-content: space-between;
+
 }
+
+/*Submit Button*/
 button{
   color:#ffffff;
   background-color: #eb96aa;
@@ -409,6 +479,8 @@ button{
   -webkit-transition-duration:0.4s;
   transition-duration:0.4s;
   border: #b4687a 1px solid;
+  border-radius: 15px;
+
   
 }
 button:hover{
@@ -476,4 +548,31 @@ button:hover{
     cursor: pointer;
     transform: scale(1.03);
     transition: all 1s ease;
+  }
+
+/************************ 
+  Pill Button page
+  **************************/  
+
+  .pill_button {
+    font-size: 70%;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    text-align: center;
+    display: auto;
+    background: #eb96aa;
+    cursor: pointer;
+  }
+
+  .pill_button:not(.pill_button--selected):hover {
+    background: #b4687a;
+  }
+
+  .pill_button--selected {
+    background: #eb96aa;
+    color: white;
   }
