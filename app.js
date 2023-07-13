@@ -52,6 +52,11 @@ app.get("/views/home.ejs", (req, res) => {
 });
 
 
+// route for many deals button in footer - TO BE REMOVED
+app.get("/views/many_deals.ejs", (req, res) => {
+    res.render('many_deals')
+});
+
 
 
 
