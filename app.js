@@ -55,34 +55,20 @@ app.get("/views/home.ejs", (req, res) => {
     res.render('sign_up');
 });
 
-//  //route for User button in footer
-//  app.get("/views/user.ejs", (req, res) => {
-//     let read_data_from_db = ` SELECT * FROM user `;
-//     connection.query( read, (err, userdbdata) => {
-//         if(err) throw err;
-//         res.render('user', {userdbdata});
-//     });
-// });
+  /************************ 
+  Successful Testing of user data from db in user profile page
+  **************************/ 
 
  //route for User button in footer
  app.get("/views/user.ejs", (req, res) => {
-        res.render('user');
+    let read = `SELECT * FROM user`;
+
+    connection.query( read, (err, familydata) => {
+        if(err) throw err;
+        console.table(familydata);
+        res.render('user', {familydata});
     });
-
-// /************************ 
-//   Testing User Data from Database
-//   **************************/
-
-// app.get('/user',  (req, res) => {
-//     let read = ` SELECT * FROM user `;
-//     connection.query( read, (err, userdata) => {
-//         if(err) throw err;
-//         res.render('user', {userdata});
-//     });
-// });
-
-
-
+});
 
  //route for card in footer - TO BE REMOVED
  app.get("/views/card.ejs", (req, res) => {
@@ -100,15 +86,10 @@ app.get("/views/many_deals.ejs", (req, res) => {
     res.render('many_deals')
 });
 
-/************************ 
-  Testing Database
-  **************************/
-
-// app.get('/user', (req, res) => {
-//     let title = "User Table from Database";
-//     let read_user_data = "SELECT * FROM user";
-// });
-
+// route for post a deal or voucher button in footer
+app.get("/views/post_deal_voucher.ejs", (req, res) => {
+    res.render('post_deal_voucher')
+});
 
 
 app.listen(process.env.PORT || 3000, ()=>{ 
