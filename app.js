@@ -8,6 +8,8 @@ const mysql = require('mysql');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+// middleware to process form data
+app.use(express.urlencoded({ extended: true }));
 
 // connecting to PhpMyAdmin Database
 const connection = mysql.createConnection({
@@ -50,10 +52,28 @@ app.get("/views/home.ejs", (req, res) => {
     res.render('all_vouchers');
 });
 
+  /************************ 
+  Testing form posting from web to db
+  **************************/ 
+
+
+
  //route for sign up button in footer
  app.get("/views/sign_up.ejs", (req, res) => {
     res.render('sign_up');
 });
+
+app.post('/sign_up', (req, res) =>{ 
+
+    let user_id = req.body.user_id;
+    res.send(user_id);
+
+});
+
+
+
+
+
 
   /************************ 
   Successful Testing of user data from db in user profile page
