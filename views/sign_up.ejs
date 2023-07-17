@@ -18,34 +18,24 @@
         <div class="container">
             <div class="sign_up_container_content">
                <img src="https://bankonheritage.com/wp-content/uploads/2017/12/savings-header.jpg" alt="header-image" class="cld-responsive">
-                    <form action="/sign_up" method="post"> 
-                       <input type="text" placeholder="First Name">
-                       <input type="text" placeholder="Last Name">
-                       <input type="email" placeholder="Email Address">
-                       <input type="password" placeholder="Create a Password" &nbsp; for="date_of_birth">   Date of Birth:   </label>
-                       <input type="date" placeholder="Date Of Birth">
-                       <div class="beside">
-                        <select name="gender_field">
-                            <option>Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Non-Binary</option>
-                            <option>Other</option>
-                            <option>Prefer Not To Answer</option>
+                    <form action="/insert_user" method="post"> 
+
+                        <input name="email_field" required type="email" placeholder="Email Address">
+                        <input name="password_field" required type="password" placeholder="Create a Password">
+                       <input name="first_name_field" required type="text" placeholder="First Name">
+                       <input name="last_name_field" required type="text" placeholder="Last Name">
+                       Date of Birth: <input name="dob_field" required type="date" placeholder="Date Of Birth">
+                       <input name="gender_field" required type="text" placeholder="Gender">
+                    <select name="county_field" required>
+                            <option value="" selected>Select a County... </option>
+                            <option value="6">Down</option>
+                            <option value="7">Antrim</option>
+                            <option value="8">Tyrone</option>
+                            <option value="9">Fermanagh</option>
+                            <option value="10">Derry / Londonderry</option>
+                            <option value="11">Armagh</option>
                         </select>
-                    </div>
-                        <select>
-                            <option>Country</option>
-                            <option>England</option>
-                            <option>Scotland</option>
-                            <option>Wales</option>
-                            <option>Northern Ireland</option>
-                        </select>
-                        <p><input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                        <label 
-                        class="form-check-label" for="invalidCheck"> Agree to terms and conditions
-                        </label></p>
-                        <button type="button">Submit</button>
+                        <a href= "user.ejs"><button type="button">Submit</button> <!-- End submit button -->
                     </form>
     
     </div>
@@ -63,3 +53,4 @@
  
   <%- include ("footer") %>
 </html>
+

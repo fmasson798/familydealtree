@@ -53,24 +53,111 @@ app.get("/views/home.ejs", (req, res) => {
 });
 
   /************************ 
+   
   Testing form posting from web to db
+
   **************************/ 
 
-
-
  //route for sign up button in footer
- app.get("/views/sign_up.ejs", (req, res) => {
+app.get("/views/sign_up.ejs", (req, res) => {
     res.render('sign_up');
 });
 
-app.post('/sign_up', (req, res) =>{ 
+app.post('/sign_up', (req, res) => {
+    
+    let email = req.body.email_field;
+    let password = req.body.password_field;
+    let first_name = req.body.first_name_field;
+    let last_name = req.body.last_name_field;
+    let dob = req.body.dob_field;
+    let gender = req.body.gender_field;
+    let county_id = req.body.county_field;
+ 
+    let sqlinsert = ` INSERT INTO user ( user_email, user_password, 
+                    first_name, last_name, dob, gender, county_id)
+                     VALUES ( ?, ?, ?, ?, ?, ?, ?);`;
 
-    let user_id = req.body.user_id;
-    res.send(user_id);
+        connection.query(sqlinsert,[email,password,first_name,last_name,dob,gender,county_id] , (err, data_object) => { 
+            
+            if (err) throw err;
+            res.send('well done it has been added');
 
+        });
+});
+
+/* Johns Example
+
+1.
+
+app.get('/insertevent', (req, res) =>{
+    res,render('create_event);
 });
 
 
+******** Anything that is _field is a name and is put after 
+the <input***********
+Example:
+<input name="details_field" required>
+
+
+2.
+
+app.post('/insertevent', (req, res) => {
+    let bandid = req.body.artist_field;
+    let venue = req.body.venue_field;
+    let event = req.body.details_field;
+    let day = req.body.date_field;
+
+    let sqlinsert = ` INSERT INTO gig_events ( band_id, venue, 
+                    event_details, perform_on)
+                    VALUES( '${bandid}', '${venue}', '${event}', '${day}' );
+':
+
+        connection.query(sqlinsert, (err, dataobj) => { 
+            
+            if (err) throw err;
+        res.send(wwell done it has been added);
+
+        });
+});
+
+My Example
+
+app.post('/insertevent', (req, res) => {
+    let first_name = req.body.first_name_field;
+    let last_name = req.body.last_name_field;
+    let email = req.body.email_field;
+    let password = req.body.password_field;
+    let dob = req.body.dob_field;
+    let gender = req.body.gender_field;
+    let county_id = req.body.county_field;
+ 
+
+
+    let sqlinsert = ` INSERT INTO user ( user_id, user_email, user_password, 
+                                    first_name, last_name, dob, gender, county_id)
+
+                     VALUES ( '${first_name}', '${last_name}','${email}', '${password}',
+                                '${dob}', '${gender}','${county_id}');`
+
+        connection.query(sqlinsert, (err, data_object) => { 
+            
+            if (err) throw err;
+        res.send(wwell done it has been added);
+
+        });
+});
+
+
+
+
+
+
+
+
+
+
+*/
 
 
 
