@@ -59,25 +59,12 @@ app.get("/views/home.ejs", (req, res) => {
   **************************/ 
 
  //route for sign up button in footer
-app.get("/views/sign_up.ejs", (req, res) => {
-    res.render('sign_up');
-
-let read = `SELECT * FROM user`;
-
-    connection.query(read, (err, familydata) => {
-        if(err) throw err;
-
-         //console.table(familydata);
-
-        console.log(req);
-
-         res.render('user', {familydata});
-    });
-
+app.get('/sign_up', (req, res) =>{
+    res,render('sign_up');
 });
-/**
-app.post('/sign_up', (req, res) => {
-    
+
+
+app.post('/insertevent', (req, res) => {
     let email = req.body.email_field;
     let password = req.body.password_field;
     let first_name = req.body.first_name_field;
@@ -86,14 +73,18 @@ app.post('/sign_up', (req, res) => {
     let gender = req.body.gender_field;
     let county_id = req.body.county_field;
  
-    let sqlinsert = ` INSERT INTO user ( user_email, user_password, 
-                    first_name, last_name, dob, gender, county_id)
-                     VALUES ( ?, ?, ?, ?, ?, ?, ?);`;
 
-        connection.query(sqlinsert,[email,password,first_name,last_name,dob,gender,county_id] , (err, data_object) => { 
+
+    let sqlinsert = ` INSERT INTO user (user_email, user_password, 
+                                    first_name, last_name, dob, gender, county_id)
+
+                     VALUES ( '${email}','${password}','${first_name}','${last_name}',
+                                '${dob}', '${gender}','${county_id}');`
+
+        connection.query(sqlinsert, (err, data_object) => { 
             
             if (err) throw err;
-            res.send('well done it has been added');
+        res.send("well done it has been added");
 
         });
 });
@@ -181,18 +172,16 @@ app.post('/insertevent', (req, res) => {
 
  //route for User button in footer
 app.get("/views/user.ejs", (req, res) => {
-    let read = ` SELECT user_id, user_email, user_password, first_name,
-                 last_name, dob, gender, county_id, user_img_path,
-                 FROM user
-                 INNER JOIN county
-                 ON county.county_id = user.county_id
-                 ORDER BY county_id`;
+    let read = `SELECT user.first_name,user.last_name,
+                 user.user_email, user.user_password, user.dob,
+                 user.gender,user.user_img_path, county.county_name
+                FROM user
+                JOIN county ON user.county_id = county.county_id;`;
     connection.query( read, (err, userdata) => {
         if(err) throw err;
         res.render('user', {userdata});
     });
 });
-
 
 
  //route for card in footer - TO BE REMOVED
@@ -230,12 +219,9 @@ app.get("/views/all_categories.ejs", (req, res) => {
 
     let read = ` SELECT *
                 FROM category `;
-
     connection.query( read, (err, categorydata) => {
-
         if(err) throw err;
         res.render('all_categories', {categorydata});
-
     });
 });
 
