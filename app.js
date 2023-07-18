@@ -61,8 +61,21 @@ app.get("/views/home.ejs", (req, res) => {
  //route for sign up button in footer
 app.get("/views/sign_up.ejs", (req, res) => {
     res.render('sign_up');
-});
 
+let read = `SELECT * FROM user`;
+
+    connection.query(read, (err, familydata) => {
+        if(err) throw err;
+
+         //console.table(familydata);
+
+        console.log(req);
+
+         res.render('user', {familydata});
+    });
+
+});
+/**
 app.post('/sign_up', (req, res) => {
     
     let email = req.body.email_field;
@@ -163,19 +176,24 @@ app.post('/insertevent', (req, res) => {
 
 
   /************************ 
-  Successful Testing of user data from db in user profile page
+   START HERE 18/07/2023
   **************************/ 
 
  //route for User button in footer
- app.get("/views/user.ejs", (req, res) => {
-    let read = `SELECT * FROM user`;
-
-    connection.query( read, (err, familydata) => {
+app.get("/views/user.ejs", (req, res) => {
+    let read = ` SELECT user_id, user_email, user_password, first_name,
+                 last_name, dob, gender, county_id, user_img_path,
+                 FROM user
+                 INNER JOIN county
+                 ON county.county_id = user.county_id
+                 ORDER BY county_id`;
+    connection.query( read, (err, userdata) => {
         if(err) throw err;
-        console.table(familydata);
-        res.render('user', {familydata});
+        res.render('user', {userdata});
     });
 });
+
+
 
  //route for card in footer - TO BE REMOVED
  app.get("/views/card.ejs", (req, res) => {
@@ -187,6 +205,15 @@ app.post('/insertevent', (req, res) => {
     res.render('pill_button');
 });
 
+ //route for all deals A-Z in footer - TO BE REMOVED
+ app.get("/views/all_deals_AZ.ejs", (req, res) => {
+    res.render('all_deals_AZ');
+});
+
+ //route for all vouchers A-Z in footer - TO BE REMOVED
+ app.get("/views/all_vouchers_AZ.ejs", (req, res) => {
+    res.render('all_vouchers_AZ');
+});
 
 // route for many deals button in footer - TO BE REMOVED
 app.get("/views/many_deals.ejs", (req, res) => {
@@ -196,6 +223,30 @@ app.get("/views/many_deals.ejs", (req, res) => {
 // route for post a deal or voucher button in footer
 app.get("/views/post_deal_voucher.ejs", (req, res) => {
     res.render('post_deal_voucher')
+});
+
+// route for all categories button in footer
+app.get("/views/all_categories.ejs", (req, res) => {
+
+    let read = ` SELECT *
+                FROM category `;
+
+    connection.query( read, (err, categorydata) => {
+
+        if(err) throw err;
+        res.render('all_categories', {categorydata});
+
+    });
+});
+
+// route for all brands button in footer
+app.get("/views/all_brands.ejs", (req, res) => {
+    let read = ` SELECT *
+                FROM brand `;
+    connection.query( read, (err, branddata) => {
+        if(err) throw err;
+        res.render('all_brands', {branddata});
+    });
 });
 
 

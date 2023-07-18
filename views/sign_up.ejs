@@ -7,19 +7,17 @@
     <title>Sign Up Page Header above search bar</title>
 </head>
 <body>
-    <div class="sign_up_container">
-    
-    <div class="spacer">
-    <h1> Sign Up </h1>
-    </div>
-    <br></div>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
-    
-        <div class="container">
-            <div class="sign_up_container_content">
-               <img src="https://bankonheritage.com/wp-content/uploads/2017/12/savings-header.jpg" alt="header-image" class="cld-responsive">
-                    <form action="/insert_user" method="post"> 
+    <main class="container">
+        <h1> Sign Up </h1>
+   
+        
+            <!-- familydata.forEach( (user) => {
 
+             });
+         -->
+
+        
+                    <form action="/insert_user" method="post"> 
                         <input name="email_field" required type="email" placeholder="Email Address">
                         <input name="password_field" required type="password" placeholder="Create a Password">
                        <input name="first_name_field" required type="text" placeholder="First Name">
@@ -43,14 +41,8 @@
     <br>
     Already a member? <u style="color:#218B82;"><a href="/views/login.ejs">Login Here!</a></u>
     </br>
-</div>
-      
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
-   
-    </div>
- </div>
+
 </body>
- 
   <%- include ("footer") %>
 </html>
 

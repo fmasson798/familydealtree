@@ -1,0 +1,28 @@
+<%- include ("header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Brands</title>
+</head>
+<body>
+        <main class="container">
+            <h1> Brands: </h1>
+
+            <% branddata.forEach ( (brand)  => {%>
+
+            <div class="card">
+                <a href="/all_brands?brandid=<%= brand.brand_id %>"> 
+                  
+                <img src="<%= brand.brand_img_path %>" class="card-img-top" alt="Oops! Image not found">
+                  
+              </div>
+    
+          
+               <%  });   %>
+    
+
+</body>
+<%- include ("footer") %>
+</html>

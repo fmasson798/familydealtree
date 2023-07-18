@@ -1,80 +1,30 @@
-
 <%- include ("header") %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Page Header above search bar</title>
-    <link rel="stylesheet" href="/styles.css" >
-
 </head>
 <body>
+    <main class="container">
 
-    <%
-    familydata.forEach( (user) => {
+        <% userdata.forEach ( (user)  => { %>
 
-    let email = user.user_email;
+        <div class="card">
+            <a href="/user?userid=<%= user.user_id %>"> 
+                <div><h3><%= user.first_name %></h3></div>
+                <div><h3><%= user.last_name %></h3></div>                           
+                <img src="<%= user.user_img_path %>" class="card-img-top" alt="Oops! Image not found">
+                <div><p><%= user.user_email %></p></div>
+                <div><p><%= user.user_password %></p></div>              
+                <div><p><%= user.dob %></p></div>              
+                <div><p><%= user.gender %></p></div>              
+                <div><p><%= user.county_id %></p></div>              
 
-    %>
-
-    <article>
-        <h3> <%= user.first_name %> <%= user.last_name %></h3>
-        <p> <%= user.user_email %></p>
-        <p> <%= user.user_password %></p>
-        <p> <%= user. dob %></p>
-        <p> <%= user.gender %></p>
-        <p> <%= user.county %></p>
-        <p> <%= user.country %></p>
-
-    </article>
-
-    <% }); %>
-
-
-
-
-    <!-- <div class="profile_wrapper">
-        <div class="left">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="user" width="100">
-            <h1> John Doe </h1>
-            <p> Email: __________</p>
         </div>
-        <div class="right">
-            <div class="info">
-                <h2> Information </h2>
-                <div class="info_data">
-                    <div class="data">
-                        <h3> Email </h3>
-                        <p> whatever the email is</p>
-                    </div>
-                    <div class="data">
-                        <h3> Phone </h3>
-                        <p> 2852465401245 </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="projects">
-                <h2>projects</h2>
-                <div class="projects_data">
-                    <div class="data">
-                        <h3> Recent </h3>
-                        <p> Whatever the recent is </p>
-                    </div>
-                    <div class="data">
-                        <h3> Most Viewed </h3>
-                        <p> Whatever the most viewed is</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
+      
+           <%  });   %>
 </body>
- 
 <%- include ("footer") %>
-
-
 </html>
