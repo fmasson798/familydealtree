@@ -1,7 +1,6 @@
 {
   "name": "famdealtree",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,11 +9,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmasson798/familydealtree.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fmasson798/familydealtree/issues"
+  },
+  "homepage": "https://github.com/fmasson798/familydealtree#readme",
+  "description": ""
 }

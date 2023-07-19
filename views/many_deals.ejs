@@ -8,24 +8,8 @@
     <title>Many Deals Sandbox</title>
 </head>
 <body>
-    <% vinyldata.forEach ( (vinyl)  => {  %>
 
-        <div class="simplecard">
-          <a href="/vinyl?vid=<%= vinyl.vinyl_id %>"> 
-          <div class="title">
-             <%= vinyl.vinyl_name %>
-            </div>
-            <div>
-              <%= vinyl.year %>
-            </div>
-          </a>
-        </div>
-        
-             <%  });   %>
-
-
-</body>
-
+</body> 
 <%- include ("footer") %>
 
 </html>
