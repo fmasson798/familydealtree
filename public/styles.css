@@ -2,13 +2,8 @@
 /************************ 
   Home page
   **************************/
-
-  body{
-    margin: 0px;
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
   
-  }
+  
   header{
     background-color: #218b82;
     padding: 10px;
@@ -77,11 +72,6 @@
   nav li a:hover {
     background-color: #218b82;
   }
-
-.topnav a.active {
-  background-color: #98d4bb;
-  color: #218b82;
-}
 
 .search_bar {
   float:left;
@@ -334,21 +324,10 @@
     gap: 24px;
   }
   
-  @media screen and (max-width: 960px) {
-    article {
-      container: card/inline-size;
-    }
     .article-body p {
       display: none;
     }
-  }
   
-  @container card (min-width: 380px) {
-    .article-wrapper {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 16px;
-    }
     .article-body {
       padding-left: 0;
     }
@@ -362,7 +341,6 @@
       aspect-ratio: 1;
       object-fit: cover;
     }
-  }
   
   .sr-only:not(:focus):not(:active) {
     clip: rect(0 0 0 0); 
@@ -374,7 +352,6 @@
     width: 1px;
   }
 
-
 /************************ 
   Sign Up page
   **************************/
@@ -385,8 +362,6 @@
   height:500px;
   border-radius: 15px;
  
-  
-
 }
 img{
   width: 100%;
@@ -396,11 +371,10 @@ img{
 }
 .form-title{
   padding:10px;
-
 }
+
 form{
   padding:10px;
-
 }
 
 /*This is for email and username*/
@@ -420,7 +394,6 @@ input[type=number]{
   margin: 8px 0;
   padding: 10px;
   border-radius: 15px;
-
 }
 
 input[type=password]{
@@ -480,9 +453,8 @@ button{
   transition-duration:0.4s;
   border: #b4687a 1px solid;
   border-radius: 15px;
-
-  
 }
+
 button:hover{
     background:#b4687a; 
   }
@@ -578,18 +550,63 @@ button:hover{
   .wrapper .right .info,
   .wrapper .right .projects {
     display: flex;
-    justify-content: ;
   }
 
-  .wrapper .right .data {
 
-  }
 
-  .wrapper .right .projects {
+  /************************ 
+  From Gitbook 10 - API calls
+  **************************/ 
+  body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+main{
+    width: 70%;
+    margin: 0 auto;
+}
 
-  }
+nav a {
+    color:rgb(0, 0, 0);
+    font-size: mediumnav;
+    text-decoration: none;
+};
+nav a:hover {
+    text-decoration: underline;
+};
 
-  .wrapper .right .projects_data {
+body{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+main{
+  width: 70%;
+  margin: 0 auto;
+}
+nav{
+  width:100%;
+  height: 30px;
+  background-color: rgb(216, 216, 216);
+  color: rgb(0, 0, 0);
+  padding: 20px;
+}
+nav a {
+  color:rgb(0, 0, 0);
+  font-size: medium;
+  text-decoration: none;
+}
+nav a:hover {
+  text-decoration: underline;
+}
 
-  }
-
+.myadd{
+    width: 50%;
+ }
+ input[type=text]{
+    width: 100%;
+ }
+ textarea{
+    width: 100%;
+    height: 80px;
+ }
+ 

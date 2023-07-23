@@ -3,7 +3,7 @@ const app = express();
 const mysql = require('mysql');
 
 const path = require('path');
-const PORT = 3000;
+const PORT = 4000;
 const bodyParser = require('body-parser');
 
 const cookieParser = require('cookie-parser');
@@ -19,7 +19,7 @@ app.use(sessions({
    resave: false
 }));
 
-app.use(express.static('public'));
+app.use(express.static('/public'));
 
 //middleware to be able POST <form> data 
 app.use(express.urlencoded({ extended: true }));
@@ -46,7 +46,7 @@ db.connect((err)=>{
 
  //route for home button on header navigation
 app.get("/home", (req, res) => {
-    res.render('home');
+    res.render("home");
 });
 
  //route for tiles of all deals button on header navigation
@@ -170,6 +170,19 @@ app.post('/', (req,res) => {
 });
 
 
+app.get('/dashboard', (req,res) => {
+    let sessionobj = req.session;
+    if(sessionobj.authen){
+        let uid = sessionobj.authen;
+        let user = 'SELECT * FROM user WHERE user_id = ?';
+        db.query(user, [uid], (err, row)=>{ 
+            let firstrow = row[0];
+            res.render('dashboard', {userdata:firstrow});
+        });
+    }else{
+        res.send("denied");
+    } 
+});
 
 //route for all vouchers A-Z in footer - TO BE REMOVED
 app.get("/allvouchersAZ", (req, res) => {
