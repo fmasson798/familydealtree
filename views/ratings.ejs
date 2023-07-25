@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Post</title>
+</head>
+<body>
+    <h1> Rate Post</h1>
+    <form action="/ratings/{{ post_id}}" method="post">
+        <label for="rating">Rate (1-5): </label>
+        <input type="number" name="rating_score" id="rating_score" min="1" max="5">
+        <button type="submit"> Submit Rating </button>
+    </form>
+    <a href="/">Back to Post </a>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<%- include ("header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Deals and Vouchers together Page Header above search bar</title>
+</head>
+<body>
+    <h3>All Deals and Vouchers</h3>
+  <main class="container">
+
+    <% postdata.forEach ( (post)  => { %>
+
+    <div class="card">
+        <a href="/alldeals?postid=<%= post.post_id %>"> </a>
+            <div><h3><%= post.title %></h3></div>                          
+            <div><p><%= post.image_path  %></p></div>                           
+        </div>
+  
+       <%  });   %>
+</main>
+</body>
+ 
+<%- include ("footer") %>
+</html>

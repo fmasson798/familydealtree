@@ -12,19 +12,17 @@
         <% userdata.forEach ( (user)  => { %>
 
         <div class="card">
-            <a href="/user?userid=<%= user.user_id %>"> 
+            <a href="/user?userid=<%= user.user_id %>"> </a>
                 <div><h3><%= user.first_name %></h3></div>
                 <div><h3><%= user.last_name %></h3></div>                           
-                <img src="<%= user.user_img_path %>" class="card-img-top" alt="Sorry! No Image Available">
                 <div><p><%= user.user_email %></p></div>
                 <div><p><%= user.user_password %></p></div>              
-                <div><p><%= user.dob %></p></div>              
-                <div><p><%= user.gender %></p></div>              
                 <div><p><%= user.county_name %></p></div>              
 
-        </div>
+            </div>
       
            <%  });   %>
+    </main>
 </body>
 <%- include ("footer") %>
 </html>

@@ -9,55 +9,59 @@
     <title>Post A Deal or Voucher</title>
 </head>
 <body>
-    <form>
-        <label for="post_title_field">Title:</label><br>
-        <input type="text" id="title_field" name="title_field"><br>
-
-        <label for="post_desc_field">Description:</label><br>
-        <input type="text" id="desc_field" name="desc_field"><br>
-        
-        <label for="post_voucher_code_field">Voucher Code:</label><br>
-        <input type="text" id="vcode_field" name="vcode_field"><br>
-        
-        <label for="post_start_date_field">Start Date:</label><br>
-        <input type="date" id="sdate_field" name="sdate_field"><br>
-       
-        <label for="post_end_date_field">End Date:</label><br>
-        <input type="date" id="edate_field" name="edate_field"><br>
-       
-        <label for="post_location_field">Location:</label><br>
-        <input type="text" id="location_field" name="location_field"><br>
-        
-        <label for="post_redemtion_instructions_field">Redemtion Instructions:</label><br>
-        <input type="text" id="redemi_field" name="redemi_field"><br>
+    <main class="container">
+        <h1> Post a Deal or Voucher </h1>
+         
+                    <form action="/insertoffer" method="post"> 
+                        <input name="title_field" required type="text" placeholder="Title">
+                        <input name="post_desc_field" required type="text" placeholder="Description">
+                       <input name="post_voucher_code_field" required type="text" placeholder="Voucher Code">
+                       <input name="post_start_date_field" required type="date" placeholder="Start Date">
+                       <input name="post_end_date_field" required type="date" placeholder="End Date">
+                       <input name="post_location_field" required type="text" placeholder="Online or Offline">
+                       <input name="post_redemtion_instructions_field" required type="text" placeholder="Redemtion Instructions">
+                       <input name="post_web_link_field" required type="text" placeholder="Link to Website">
+                       <input name="post_image_field" required type="text" placeholder="Image">
+                       <input name="terms_conditions_field" required type="text" placeholder="Link to Terms & Conditions">
+                       <input name="post_num_likes_field" required type="number" placeholder="Number of Likes">
+                       <input name="post_num_ratings_field" required type="number" placeholder="Number of Ratings">
+                       <input name="post_user_field" required type="text" placeholder="Posted by:">
+                       <input name="post_brand_field" required type="text" placeholder="Brand">
+                       <input name="post_discount_field" required type="text" placeholder="Discount">
+                       <input name="post_location_field" required type="text" placeholder="Location">
+                       <button>Submit</button> <!-- End submit button -->
+                    </form>
+    </main>   
     
-        <label for="post_web_link_field">Web Link:</label><br>
-        <input type="text" id="link_field" name="link_field"><br>
-    
-        <label for="post_image_field">Image path: </label><br>
-        <input type="text" id="image_field" name="image_field"><br>
-    
-        <label for="terms_conditions_field">Terms & Conditions:</label><br>
-        <input type="text" id="tandc_field" name="t&c_field"><br>
-    
-        <label for="post_num_likes_field">Number of Likes:</label><br>
-        <input type="number" id="numlikes_field" name="_field"><br>
+<h3> Taken from Dashboard:</h3>
+<body>
+    <header>
+       <a href="\logout">logout</a>
+    </header>
+       <main>
+           <h2>Dashboard</h2>
+           <p>Logged in as: <%= userdata.role  %> </p>
+           <div>
+               <blockquote>
+                 <p>Create a TV show to My Telly</p>
+                 <a href="/addshow">ADD show</a>
+               </blockquote>
+           </div>
+           <div>
+               <blockquote>
+                 <p>Edit a deal</p>
+                 <a href="/editdeal">EDIT deal</a>
+               </blockquote>
+           </div>
+           <div>
+               <blockquote>
+                 <p>Delete a deal</p>
+                 <a href="/deletedeal">DELETE deal</a>
+               </blockquote>
+           </div>
+       </main>
+   </body>
 
-        <label for="post_num_ratings_field">Number of Ratings:</label><br>
-        <input type="number" id="numrates_field" name="numrates_field"><br>
-
-        <label for="post_user_field">Posted By:</label><br>
-        <input type="text" id="posteduser_field" name="posteduser_field"><br>
-
-        <label for="post_brand_field">Brand:</label><br>
-        <input type="text" id="brand_field" name="brand_field"><br>
-
-        <label for="post_discount">Discount:</label><br>
-        <input type="text" id="discount_field" name="discount_field"><br>
-
-        <label for="post_location_field">Online / Offline Offer:</label><br>
-        <input type="text" id="location_field" name="location_field"><br>
-    </form>
 </body>
 
 <%- include ("footer") %>

@@ -14,13 +14,13 @@
 
         <div class="card">
             <a href="/all_categories?categoryid=<%= category.category_id %>"> 
-            <div><h3><%= category.category_name %></h3></div>              
+            <div><h3><%= category.category_name %></h3></div></a></div>              
             <img src="<%= category.category_img_path %>" class="card-img-top" alt="Oops! Image not found">
-            <div><h5><%= category.category_description %></h5></div>
+            <div><p><%= category.category_description %></p></div>
         </div>
       
            <%  });   %>
-
+    </main>
 
 </body>
 <%- include ("footer") %>

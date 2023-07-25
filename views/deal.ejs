@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <main class="container">
+
+        <% postdata.forEach ( (post)  => { %>
+    
+        <div class="card">
+            <a href="/alldeals?postid=<%= post.post_id %>"> </a>
+                <div><h3><%= post.title %></h3></div>
+                <div><p><%= post.description  %></p></div>                           
+                <div><p><%= post.voucher_code  %></p></div>                           
+                <div><p><%= post.start_date  %></p></div>                           
+                <div><p><%= post.end_date  %></p></div>                           
+                <div><p><%= post.location  %></p></div>                           
+                <div><p><%= post.redemtion_instructions  %></p></div>                           
+                <div><p><%= post.website_link  %></p></div>                           
+                <div><p><%= post.image_path  %></p></div>                           
+                <div><p><%= post.terms_conditions  %></p></div>                           
+                <div><p><%= post.num_likes  %></p></div>                           
+                <div><p><%= post.num_ratings  %></p></div>                           
+                <div><p><%= post.brand_name %></p></div>              
+                <div><p><%= post.offer_type_name %></p></div>              
+                <div><p><%= post.discount_type %></p></div>              
+                <div><p><%= post.location_type_name %></p></div>
+            </div>
+      
+           <%  });   %>
+    </main>
+
+    <a href="/likes/{{post_id}}">Like</a>
+    <a href="/ratings/{{post_id}}">Rate</a>
+    <a href="/saves/{{post_id}}">Save</a>
+</body>
+</html>
