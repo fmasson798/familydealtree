@@ -63,28 +63,23 @@ app.get("/", (req, res) => {
 
 // All Deals (deals & vouchers)
 app.get("/alldeals", (req, res) => {
-  let read = `SELECT post_title, post_description, voucher_code,
-        start_date, end_date, location, redemtion_instructions, website_link,
-        image_path, terms_conditions, num_likes, num_ratings,post.user_id,
-        post.brand_id,post.offer_type_id,post.discount_id,post.location_type_id
-        
-        FROM post
-        
-        INNER JOIN user ON post.user_id = user.user_email
-        INNER JOIN brand ON post.brand_id = brand.brand_name
-        INNER JOIN offer_type ON post.offer_type_id = offer_type.offer_type_name
-        INNER JOIN discount ON post.discount_id = discount.discount_type
-        INNER JOIN location_type ON post.location_type_id = location_type.location_type_name`;
-
+  let read = `SELECT post.post_title, post.image_path
+              FROM post`
   db.query(read, (err, postdata) => {
     if (err) throw err;
-    res.render("all_deals_vouchers", { postdata });
-  });
+  res.render("all_deals_vouchers",{ postdata } );
+});
 });
 
 //All deals A-Z (footer)
 app.get("/alldealsAZ", (req, res) => {
-  res.render("all_deals_AZ");
+  let read = `SELECT post.post_title, post.image_path
+              FROM post
+              ORDER BY post.post_title`
+  db.query(read, (err, postdata) => {
+    if (err) throw err;
+  res.render("all_deals_AZ",{ postdata } );
+});
 });
 
 //All vouchers A-Z (footer)
@@ -94,12 +89,16 @@ app.get("/allvouchersAZ", (req, res) => {
 
 //User Profile
 app.get("/user", (req, res) => {
+  let getid = req.query.u_id;
   let read = `SELECT user.first_name,user.last_name,
         user.user_email, user.user_password
         , county.county_name
         FROM user
-        JOIN county ON user.county_id = county.county_id;`;
-  db.query(read, (err, userdata) => {
+        JOIN county ON user.county_id = county.county_id
+        WHERE user.user_id = ?;
+`;
+
+  db.query(read, [getid], (err, userdata) => {
     if (err) throw err;
     res.render("user", { userdata });
   });
@@ -229,7 +228,8 @@ app.get("/saves", (req, res) => {
 // All Categories
 app.get("/allcategories", (req, res) => {
   let read = ` SELECT *
-        FROM category `;
+        FROM category 
+        ORDER BY category.category_name`;
   db.query(read, (err, categorydata) => {
     if (err) throw err;
     res.render("all_categories", { categorydata });
@@ -239,7 +239,8 @@ app.get("/allcategories", (req, res) => {
 // All Brands
 app.get("/allbrands", (req, res) => {
   let read = ` SELECT *
-                FROM brand `;
+                FROM brand
+                ORDER BY brand.brand_name `;
   db.query(read, (err, branddata) => {
     if (err) throw err;
     res.render("all_brands", { branddata });

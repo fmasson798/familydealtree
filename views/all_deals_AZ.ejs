@@ -7,7 +7,19 @@
     <title>All Deals A-Z</title>
 </head>
 <body>
+    <main class="container">
 
+        <% postdata.forEach ( (post)  => { %>
+
+        <div class="card">
+            <a href="/post?postid=<%= post.post_id %>"> </a>
+                <div><h3><%= post.post_title %></h3></div>
+                <div><p><img src="<%= post.image_path %>"></p></div>
+
+            </div>
+      
+           <%  });   %>
+    </main>
 </body>
 <%- include ("footer") %>
 </html>
