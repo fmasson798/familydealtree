@@ -1,0 +1,36 @@
+<%- include ("header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<h3> Single Voucher</h3>
+</head>
+<body>
+    <main class="container">
+
+        <% voucherdata.forEach ( (voucher)  => { %>
+    
+        <div class="card">
+            
+                <div><h3><%= voucher.voucher_title %></h3></div>
+                <div><p><%= voucher.voucher_description  %></p></div>                           
+                <div><p><a href="<%= voucher.voucher_link  %>"><%= voucher.voucher_link  %></a></p></div>  
+                <div><p> Terms of Voucher <%= voucher.voucher_terms  %></p></div>                           
+                <div><p> End Date: <%= voucher.end_date  %></p></div>                           
+                <div><p> Category : <%= voucher.category_name  %></p></div>                           
+                <div><p> Brand : <%= voucher.brand_name  %></p></div>                           
+                <div><p> Discount Type : <%= voucher.discount_type_name  %></p></div>
+                <div><p> Posted by : <%= voucher.user_email  %></p></div>
+
+            </div>
+      
+           <%  });   %>
+    </main>
+
+    <a href="/likes/{{post_id}}">Like</a>
+    <a href="/ratings/{{post_id}}">Rate</a>
+    <a href="/saves/{{post_id}}">Save</a>
+</body>
+<%- include ("footer") %>
+</html>

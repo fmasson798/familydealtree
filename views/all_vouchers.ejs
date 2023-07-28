@@ -7,21 +7,20 @@
     <h3> All Vouchers </h3>
 </head>
 <body>
-    <% voucherdata.forEach ( (voucher)  => { %>
-
     <main class="container">
-            <div class="card">
-                <a href="/voucher?voucherid=<%= voucher.voucher_id %>"> </a>
-                    <div><h3><%= voucher.voucher_title %></h3></div>
-                    <div><p><%= voucher.voucher_desc %></p></div>
-                    <div><h3><%= voucher.voucher_code %></h3></div>
-                    <div><p><%= voucher.voucher_terms %></p></div>
-                    <div><p><%= voucher.end_date %></p></div>
-                    <div><p><%= voucher.category_name %></p>
-                </div>
-          
-               <%  });   %>
 
+        <% voucherdata.forEach ( (voucher)  => { %>
+
+        <div class="card">
+            <a href="/voucher?v_id=<%= voucher.voucher_id %>"> 
+                <div><h3><%= voucher.voucher_title %></h3></div>
+                </a><img class="card-img-top" src="<%= voucher.brand_img_path %>" alt="Card image cap">                       
+                <p>  <%= voucher.voucher_desc %> </p>
+
+
+            </div>
+      
+           <%  });   %>
     </main>
 </body>
  

@@ -3,7 +3,7 @@ const app = express();
 const mysql = require("mysql");
 
 const path = require("path");
-const PORT = 4000;
+const PORT = 3000;
 const bodyParser = require("body-parser");
 
 const cookieParser = require("cookie-parser");
@@ -64,40 +64,29 @@ app.get("/alldeals", (req, res) => {
   let read = `SELECT * FROM deal`
   db.query(read, (err, dealdata) => {
     if (err) throw err;
-  res.render("all_deals",{ dealdata } );
+  res.render("all_deals",{dealdata} );
 });
 });
 
 //Individual Deal
-// vinyl = deal
-// vid = d_id
-// let getrow = let read
 app.get('/deal', (req, res) => { 
 
   let getid = req.query.d_id;
-  let read = `SELECT deal_title, deal_desc, deal_link, img_path, price, shipping_price,
-          category_id, brand_id, start_date, end_date, local_deal_id, discount_type_id
-          FROM deal
-          INNER JOIN category ON deal.category_id = category.category_id
-          WHERE deal.deal_id = '?';
-
-          SELECT brand.brand_name
-          FROM brand
-          INNER JOIN deal ON deal.brand_id = brand.brand_id
-          WHERE deal_id = '?';`
+  let read = `SELECT deal.deal_title, deal.deal_desc, deal.deal_link, deal.img_path, deal.price, deal.shipping_price,
+            category.category_name, brand.brand_name, deal.start_date, deal.end_date, local_deal.local_deal_name, discount_type.discount_type_name, user.user_email
+            FROM deal
+            JOIN category ON deal.category_id = category.category_id
+            JOIN brand ON deal.brand_id = brand.brand_id
+            JOIN local_deal ON deal.local_deal_id = local_deal.local_deal_id
+            JOIN discount_type ON deal.discount_type_id = discount_type.discount_type_id
+            JOIN user ON deal.user_id = user.user_id
+            WHERE deal.deal_id= ?;`
 
   
-  db.query(read, [getid, getid], (err, vinylrow) => { 
+  db.query(read, [getid], (err, dealdata) => { 
       if(err) throw err;
-      let dealdetails = dealrow[0];
-      let dealbrand = dealrow[1];
-
-
-      res.render('vinylitem', {dealdetails, dealbrand});
+      res.render('deal', {dealdata});
   });
-
- // res.send(`SQL : ${getrow}`);
-
 });
 
 //All deals A-Z (footer)
@@ -113,17 +102,39 @@ app.get("/alldealsAZ", (req, res) => {
 
 //All vouchers
 app.get("/allvouchers", (req, res) => {
-  let getid = req.query.v_id;
-  let read = `SELECT voucher.voucher_title, voucher.voucher_desc, voucher.voucher_code, voucher.voucher_terms, voucher.end_date, category.category_name
-               FROM voucher
-              JOIN category ON voucher.category_id = category.category_id
-                WHERE voucher.voucher_id = ?
-                ORDER BY voucher.voucher_title;
-  `;
-  db.query(read, [getid], (err, voucherdata) => {
+  let read = `SELECT voucher.voucher_title,
+  voucher.voucher_desc, voucher.voucher_link, voucher.voucher_code,
+  voucher.voucher_terms, voucher.end_date, category.category_name,
+  brand.brand_img_path, discount_type.discount_type_name
+     FROM voucher
+     JOIN category ON voucher.category_id = category.category_id
+    JOIN brand ON voucher.brand_id = brand.brand_id
+    JOIN discount_type ON voucher.discount_type_id = discount_type.discount_type_id`
+  db.query(read, (err, voucherdata) => {
     if (err) throw err;
-  res.render("all_vouchers",{ voucherdata } );
+  res.render("all_vouchers",{voucherdata} );
 });
+});
+
+//Individual Voucher
+app.get('/voucher', (req, res) => { 
+  let getid = req.query.v_id;
+  let read = `SELECT voucher.voucher_title,
+  voucher.voucher_desc, voucher.voucher_link, voucher.voucher_code,
+  voucher.voucher_terms, voucher.end_date, category.category_name,
+  brand.brand_name, discount_type.discount_type_name, user.user_email
+     FROM voucher
+     JOIN category ON voucher.category_id = category.category_id
+    JOIN brand ON voucher.brand_id = brand.brand_id
+    JOIN discount_type ON voucher.discount_type_id = discount_type.discount_type_id
+    JOIN user ON voucher.user_id = user.user_id
+
+    WHERE voucher.voucher_id= ?;`
+
+  db.query(read, [getid], (err, voucherdata) => { 
+      if(err) throw err;
+      res.render('voucher', {voucherdata});
+  });
 });
 
 

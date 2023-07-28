@@ -13,19 +13,21 @@
         <% dealdata.forEach ( (deal)  => { %>
     
         <div class="card">
-            <a href="/alldeals?dealid=<%= deal.deal_id %>"> </a>
-                <div><h3><%= deal.title %></h3></div>
-                <div><p><%= deal.description  %></p></div>                           
-                <div><p><%= deal.deal_link  %></p></div>                           
-                <div><p><%= deal.img_path  %></p></div>                           
-                <div><p><%= deal.price  %></p></div>                           
-                <div><p><%= deal.shipping_price  %></p></div>                           
-                <div><p><%= deal.category_id  %></p></div>                           
-                <div><p><%= deal.brand_id  %></p></div>                           
-                <div><p><%= deal.start_date  %></p></div>                           
-                <div><p><%= deal.end_date  %></p></div>                           
-                <div><p><%= deal.local_deal_id  %></p></div>                           
-                <div><p><%= deal.discount_type_id  %></p></div>                           
+            
+                <div><h3><%= deal.deal_title %></h3></div>
+                <div><p><%= deal.deal_description  %></p></div>                           
+                <div><p><a href="<%= deal.deal_link  %>"><%= deal.deal_link  %></a></p></div>  
+                <img class="card-img-top" src="<%= deal.img_path %>" alt="Card image cap"></a>                        
+                <div><p> £ <%= deal.price  %></p></div>                           
+                <div><p> £ <%= deal.shipping_price  %></p></div>                           
+                <div><p> Category : <%= deal.category_name  %></p></div>                           
+                <div><p> Brand : <%= deal.brand_name  %></p></div>                           
+                <div><p> Start Date: <%= deal.start_date  %></p></div>                           
+                <div><p> End Date : <%= deal.end_date  %></p></div>                           
+                <div><p> Local Deal : <%= deal.local_deal_name  %></p></div>                           
+                <div><p> Discount Type : <%= deal.discount_type_name  %></p></div>
+                <div><p> Posted by : <%= deal.user_email  %></p></div>
+
             </div>
       
            <%  });   %>

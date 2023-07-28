@@ -155,3 +155,35 @@ app.post("/insertoffer", (req, res) => {
     res.send(rowsobject);
   });
 });
+
+
+
+app.get("/dashboard", (req, res) => {
+  let getid = req.query.u_id;
+  let read = `SELECT user.first_name,user.last_name,
+        user.user_email, user.user_password
+        , county.county_name
+        FROM user
+        JOIN county ON user.county_id = county.county_id
+        WHERE user.user_id = ?;
+`;
+
+  db.query(read, [getid], (err, userdata) => {
+    if (err) throw err;
+    res.render("dashboard", { userdata });
+  });
+});
+
+app.get("/allvouchers", (req, res) => {
+  let getid = req.query.v_id;
+  let read = `SELECT voucher.voucher_title, voucher.voucher_desc, voucher.voucher_code, voucher.voucher_terms, voucher.end_date, category.category_name
+               FROM voucher
+              JOIN category ON voucher.category_id = category.category_id
+                WHERE voucher.voucher_id = ?
+                ORDER BY voucher.voucher_title;
+  `;
+  db.query(read, [getid], (err, voucherdata) => {
+    if (err) throw err;
+  res.render("all_vouchers",{ voucherdata } );
+});
+});
