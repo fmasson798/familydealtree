@@ -1,0 +1,40 @@
+// All Deals (Just Deals)
+app.get("/alldeals", (req, res) => {
+  let read = `SELECT * FROM deal`
+  db.query(read, (err, dealdata) => {
+    if (err) throw err;
+  res.render("all_deals",{dealdata} );
+});
+});
+
+//Individual Deal
+app.get('/deal', (req, res) => { 
+
+  let getid = req.query.d_id;
+  let read = `SELECT deal.deal_title, deal.deal_desc, deal.deal_link, deal.img_path, deal.price, deal.shipping_price,
+            category.category_name, brand.brand_name, deal.start_date, deal.end_date, local_deal.local_deal_name, discount_type.discount_type_name, user.user_email
+            FROM deal
+            JOIN category ON deal.category_id = category.category_id
+            JOIN brand ON deal.brand_id = brand.brand_id
+            JOIN local_deal ON deal.local_deal_id = local_deal.local_deal_id
+            JOIN discount_type ON deal.discount_type_id = discount_type.discount_type_id
+            JOIN user ON deal.user_id = user.user_id
+            WHERE deal.deal_id= ?;`
+
+  
+  db.query(read, [getid], (err, dealdata) => { 
+      if(err) throw err;
+      res.render('deal', {dealdata});
+  });
+});
+
+
+
+let read = `SELECT voucher.voucher_title,
+  voucher.voucher_desc, voucher.voucher_link, voucher.voucher_code,
+  voucher.voucher_terms, voucher.end_date, category.category_name,
+  brand.brand_img_path, discount_type.discount_type_name
+     FROM voucher
+     JOIN category ON voucher.category_id = category.category_id
+    JOIN brand ON voucher.brand_id = brand.brand_id
+    JOIN discount_type ON voucher.discount_type_id = discount_type.discount_type_id`

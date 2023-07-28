@@ -4,9 +4,12 @@
   **************************/
   
   
-  header{
-    background-color: #218b82;
-    padding: 10px;
+  .header {
+    padding: 60px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
   }
   
   .title{
@@ -73,34 +76,6 @@
     background-color: #218b82;
   }
 
-.search_bar {
-  float:left;
-  font-size: 16pt;
-  font-family: Arial, Helvetica, sans-serif;
-  padding-top:5px;
-  padding-bottom:5px;
-  border-radius: 15px;
-  border-color:white;
-  border-left: white;
-  border-top: white;
-  text-align: center;
-  margin: 10px;
-  border: #218b82 1px solid;
-
-}
-
-.search_button {
-  float:left;
-  background:#eb96aa;
-  width:100px;
-  padding-top:5px;
-  padding-bottom:5px;
-  color:white;
-  text-align: center;
-  border-radius: 15px;
-  margin: 10px;
-  border: #b4687a 1px solid;
-}
   
   .contact{
     width: 95%;
@@ -152,12 +127,7 @@
     nav li{
         float:none;
         border-bottom: none;
-    }
-    header{
-        padding: 20px;
-    }
-  
-  }
+    }}
 
 
 

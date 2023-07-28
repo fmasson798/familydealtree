@@ -7,24 +7,23 @@
     <title>All Categories</title>
 </head>
 <body>
-    <h3> Categories </h3>
-    <% categorydata.forEach ( (category)  => {%>
+    <h3> Categories: </h3>
 
-        
     <div class="card" style="width: 18rem;">
-        <a href="/alldeals?c_id=<%= category.category_id %>">
-        <img class="card-img-top" src="<%= category.category_img_path %>" alt="Card image cap"></a>
+        <% categorydata.forEach(category => { %>
+            <p><h3><a href="/alldealsbycategory?c_id=<%= category.category_id %>"><%= category.category_name %></a></h3></p>
             <div class="card-body">
-                    <h3> <%= category.category_name %> </h3>
-            
-                <%= category.category_description %>
+                <p><%= category.category_description %></p>
+                <p><img class="card-img-top" src="<%= category.category_img_path %>"></p>
+
+                <% }); %>
         </div>
       </div>
       <br>
       <br>
       <br>
       <br>
-               <%  });   %>
+             
 
 </body>
 <%- include ("footer") %>

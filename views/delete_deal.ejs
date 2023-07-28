@@ -1,0 +1,35 @@
+<%- include ("header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h3> Delete Deal </h3>
+</head>
+<body>
+    <p> Select a deal you would like to delete...</p>
+
+    <form action="/deletedeal" method="post"> 
+            <select name="deal_field" required>
+                <option value="" selected> Select a deal to delete...</option>
+                <option value="1">Joie Every Stage FX Car Seat - Coal - Instore (Birmingham)</option>
+            </select>
+
+        <select name="user_field" required>
+            <option value="" selected> Select a user... </option>
+            <option value="2">johnsmith01@someemail.com</option>
+            <option value="3">Jackie10@hotmail.com</option>
+            <option value="4">Jane@email.comn</option>
+            <option value="6">charlieday65@hotmail.com</option>
+            <option value="7">imabarbiegirl@gmail.com</option>
+            <option value="8">JustKen@Barbieland.net</option>
+            <option value=" ">Other</option>
+        </select>
+    
+                <p> Are you sure you want to delete this deal? </p>
+            <button type="submit" > Delete </button>
+        </form>
+    </p>
+</body>
+<%- include ("footer") %>
+</html>

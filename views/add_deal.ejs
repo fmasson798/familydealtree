@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post A Deal or Voucher</title>
 </head>
 <body>
     <main class="container">
-        <h1> Sign Up </h1>
+        <h1> Add a Deal </h1>
          
                     <form action="/insertdeal" method="post"> 
                         <input name="dtitle_field" required type="text" placeholder="Title">
@@ -67,9 +66,15 @@
                         <option value="2">Money Off (£) </option>
                         <option value="3">Free Shipping</option>
                     </select>
+<body>
+                    <select id="userDropdown" name="user_field" required>
+                        <option value="" selected> Deal Author: </option>
+                    </select>
+                    <button>Submit</button> <!-- End submit button -->
+                </form>
 
-                       <button>Submit</button> <!-- End submit button -->
-                    </form>
+<script src="script.js"></script>
+</body>
     </div>
 
 </body>

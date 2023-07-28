@@ -7,24 +7,23 @@
     <title>All Brands</title>
 </head>
 <body>
+    <h3> Brands: </h3>
 
-    <h3> Brands </h3>
-    <% branddata.forEach ( (brand)  => {%>
-
-        
     <div class="card" style="width: 18rem;">
-        <a href="/alldeals?b_id=<%= brand.brand_id %>">
-        <img class="card-img-top" src="<%= brand.brand_img_path %>" alt="Card image cap"></a>
-        <div class="card-body">
-            <a href="/all_brands?brandid=<%= brand.brand_id %>"> 
-          
+        <% branddata.forEach(brand => { %>
+            <a href="/alldealsbybrand?b_id=<%= brand.brand_id %>">
+                
+            <div class="card-body">
+                <img class="card-img-top" 
+                src="<%= brand.brand_img_path %>" 
+                alt="Card image cap"></a>
+                <% }); %>
         </div>
       </div>
       <br>
       <br>
       <br>
       <br>
-               <%  });   %>
 
 </body>
 <%- include ("footer") %>

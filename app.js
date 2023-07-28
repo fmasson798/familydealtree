@@ -102,14 +102,9 @@ app.get("/alldealsAZ", (req, res) => {
 
 //All vouchers
 app.get("/allvouchers", (req, res) => {
-  let read = `SELECT voucher.voucher_title,
-  voucher.voucher_desc, voucher.voucher_link, voucher.voucher_code,
-  voucher.voucher_terms, voucher.end_date, category.category_name,
-  brand.brand_img_path, discount_type.discount_type_name
-     FROM voucher
-     JOIN category ON voucher.category_id = category.category_id
-    JOIN brand ON voucher.brand_id = brand.brand_id
-    JOIN discount_type ON voucher.discount_type_id = discount_type.discount_type_id`
+  let read = `SELECT voucher.*, brand.brand_img_path
+              FROM voucher
+              JOIN brand ON voucher.brand_id = brand.brand_id`
   db.query(read, (err, voucherdata) => {
     if (err) throw err;
   res.render("all_vouchers",{voucherdata} );
@@ -202,8 +197,9 @@ app.get("/dashboard", (req, res) => {
 app.get("/adddeal", (req, res) => {
   res.render("add_deal");
 });
+  
+  // post deal
 
-// post deal
 app.post("/insertdeal", (req, res) => {
   let title = req.body.dtitle_field;
   let description = req.body.ddescription_field;
@@ -217,29 +213,40 @@ app.post("/insertdeal", (req, res) => {
   let enddate = req.body.edate_field;
   let localdeal = req.body.local_deal_field;
   let discounttype = req.body.discount_type_field;
+  let dealuser = req.body.user_field;
 
   let new_deal = ` INSERT INTO deal (deal_title, deal_desc, deal_link,
                    img_path, price, shipping_price, category_id,
                     brand_id, start_date, end_date, local_deal_id,
-                     discount_type_id)
+                     discount_type_id, user_id)
                     VALUES ( '${title}','${description}','${link}','${image}'
             ,'${price}', '${shipping}','${category}','${brand}','${startdate}'
-            ,'${enddate}','${localdeal}','${discounttype}');`;
+            ,'${enddate}','${localdeal}','${discounttype}','${dealuser}');`;
   db.query(new_deal, (err, rowsobject) => {
     if (err) throw err;
     res.redirect('/dashboard');
   });
 });
 
-
 //edit deal
 app.get("/editdeal", (req, res) => {
   res.render("edit_deal");
 });
 
-//delete deal
+//delete deal page
 app.get("/deletedeal", (req, res) => {
   res.render("delete_deal");
+});
+
+//delete the deal
+app.delete("/deletedeal/:deal_id", (req, res) => {
+  const delete_id = req.params.deal_id;
+  db.query(`delete from deal where deal_id=?`, delete_id,  
+   (err, rowsobject) => {
+    if (err) throw err;
+    res.send("The deal has been deleted");
+    console.log(rowsobject);
+  });
 });
 
 //add voucher
@@ -283,13 +290,6 @@ app.get("/deletevoucher", (req, res) => {
   res.render("delete_voucher");
 });
 
-
-
-
-
-
-
-
  
 //Logout
 app.get("/logout", (req, res) => {
@@ -330,53 +330,68 @@ app.post("/insertuser", (req, res) => {
   });
 });
 
-// Like a post
-app.get("/likes/:post_id", (req, res) => {
-  const { post_id } = req.params;
-  //code to handle the like operation, e.g., updating the post in the data store
+// route to like a post
+app.get("/likes", (req, res) => {
   res.render("likes", { post_id });
 });
 
 // Rate a post
-app.get("/ratings/:post_id", (req, res) => {
-  const { post_id } = req.params;
-  res.render("ratings", { post_id });
+app.get("/ratings", (req, res) => {
+  res.render("ratings");
 });
 
-// Post a form to create a rating
-app.post("/ratings/:post_id", (req, res) => {
-  const { post_id } = req.params;
-  const { rating } = req.body;
-  //code to handle the like operation, e.g., updating the post in the data store
-  res.redirect(`/post/${post_id}`);
-});
 
 // Save a post
 app.get("/saves", (req, res) => {
   res.render("saves");
 });
 
+
+
 // All Categories
 app.get("/allcategories", (req, res) => {
-  let read = ` SELECT *
-        FROM category 
-        ORDER BY category.category_name`;
+  let read = ` SELECT * FROM category` 
   db.query(read, (err, categorydata) => {
     if (err) throw err;
-    res.render("all_categories", { categorydata });
+    res.render("all_categories", {categorydata});
   });
 });
 
-// All Brands
-app.get("/allbrands", (req, res) => {
-  let read = ` SELECT *
-                FROM brand
-                ORDER BY brand.brand_name `;
-  db.query(read, (err, branddata) => {
+// deals by category
+app.get('/alldealsbycategory', (req, res) => {
+  let getid = req.query.c_id;
+  let read = `SELECT *
+              FROM deal
+              WHERE category_id = ?`;
+
+  db.query(read, [getid], (err, dealdata) => {
     if (err) throw err;
-    res.render("all_brands", { branddata });
+    res.render('all_deals_by_category', { dealdata });
   });
 });
+
+// All brands
+app.get("/allbrands", (req, res) => {
+  let read = ` SELECT * FROM brand` 
+  db.query(read, (err, branddata) => {
+    if (err) throw err;
+    res.render("all_brands", {branddata});
+  });
+});
+
+// deals by brand
+app.get('/alldealsbybrand', (req, res) => {
+  let getid = req.query.b_id;
+  let read = `SELECT *
+              FROM deal
+              WHERE brand_id = ?`;
+
+  db.query(read, [getid], (err, dealdata) => {
+    if (err) throw err;
+    res.render('all_deals_by_brand', { dealdata });
+  });
+});
+
 
 
 

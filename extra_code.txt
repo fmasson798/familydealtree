@@ -187,3 +187,54 @@ app.get("/allvouchers", (req, res) => {
   res.render("all_vouchers",{ voucherdata } );
 });
 });
+
+
+// post deal
+  function createDropdownOptions(users) {
+    const dropdown = document.getElementById('userDropdown');  }
+
+    users.forEach((user) => {
+      const option = document.createElement('option');
+      option.value = user.user_id; // Use the user_id as the option value
+      option.textContent = user.user_email; // Use the username as the visible text
+      dropdown.appendChild(option);
+    });
+  
+
+  fetch('/users')
+  .then((response) => response.json())
+  .then((users) => {
+    createDropdownOptions(users);
+  })
+  .catch((error) => {
+    console.error('Error fetching users:', error);
+    alert('Error fetching users. Please try again.');
+  });
+
+app.post("/insertdeal", (req, res) => {
+  let title = req.body.dtitle_field;
+  let description = req.body.ddescription_field;
+  let link = req.body.dlink_field;
+  let image = req.body.dimage_field;
+  let price = req.body.dprice_field;
+  let shipping = req.body.dshipping_field;
+  let category = req.body.category_field;
+  let brand = req.body.brand_field;
+  let startdate = req.body.sdate_field;
+  let enddate = req.body.edate_field;
+  let localdeal = req.body.local_deal_field;
+  let discounttype = req.body.discount_type_field;
+  let dealuser = req.body.user_field;
+
+  let new_deal = ` INSERT INTO deal (deal_title, deal_desc, deal_link,
+                   img_path, price, shipping_price, category_id,
+                    brand_id, start_date, end_date, local_deal_id,
+                     discount_type_id, user_id)
+                    VALUES ( '${title}','${description}','${link}','${image}'
+            ,'${price}', '${shipping}','${category}','${brand}','${startdate}'
+            ,'${enddate}','${localdeal}','${discounttype}','${dealuser}');`;
+  db.query(new_deal, (err, rowsobject) => {
+    if (err) throw err;
+    res.redirect('/dashboard');
+  });
+});

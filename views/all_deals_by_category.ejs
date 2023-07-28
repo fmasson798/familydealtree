@@ -1,0 +1,28 @@
+<%- include ("header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h3> All Deals </h3>
+</head>
+
+<body>
+    <main class="container">
+
+        <% dealdata.forEach ( (deal)  => { %>
+
+        <div class="card">
+            <a href="/deal?d_id=<%= deal.deal_id %>">
+                <div><h3><%= deal.deal_title %></h3></div>
+                <img class="card-img-top" src="<%= deal.img_path %>" alt="Card image cap"></a>
+                <p> £ <%= deal.price %> </p>
+
+            </div>
+      
+           <%  });   %>
+    </main>
+</body>
+ 
+<%- include ("footer") %>
+</html>
