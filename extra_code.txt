@@ -66,3 +66,92 @@
         </div>
   
        <%  });   %>
+
+
+
+// another route for dashboard?
+app.get("/dashboard", (req, res) => {
+  let sessionobj = req.session;
+  if (sessionobj.authen) {
+    let uid = sessionobj.authen;
+    let user = "SELECT * FROM user WHERE user_id = ?";
+    db.query(user, [uid], (err, row) => {
+      let firstrow = row[0];
+      res.render("dashboard", { userdata: firstrow });
+    });
+  } else {
+    res.send("denied");
+  }
+});
+
+
+       //route for dashboard
+app.get("/dashboard", (req, res) => {
+  let sessionobj = req.session;
+
+  if (sessionobj.authen) {
+    let uid = sessionobj.authen;
+    let user = "SELECT * FROM user WHERE id = ?";
+    db.query(user, [uid], (err, row) => {
+      let firstrow = row[0];
+      res.render("/dashboard", { userdata: firstrow });
+    });
+  } else {
+    res.send("denied");
+  }
+});
+
+// posts form to dashboard
+app.post("/", (req, res) => {
+  let useremail = req.body.emailField;
+  let checkuser = "SELECT * FROM user WHERE user_email = ? ";
+
+  db.query(checkuser, [useremail], (err, rows) => {
+    if (err) throw err;
+    let numRows = rows.length;
+    if (numRows > 0) {
+      let sessionobj = req.session;
+      sessionobj.authen = rows[0].id;
+      res.redirect("/dashboard");
+    } else {
+      res.redirect("/");
+    }
+  });
+});
+
+
+//User Profile
+app.get("/user", (req, res) => {
+  let getid = req.query.u_id;
+  let read = `SELECT user.first_name,user.last_name,
+        user.user_email, user.user_password
+        , county.county_name
+        FROM user
+        JOIN county ON user.county_id = county.county_id
+        WHERE user.user_id = ?;
+`;
+
+  db.query(read, [getid], (err, userdata) => {
+    if (err) throw err;
+    res.render("user", { userdata });
+  });
+});
+
+
+// Create a deal or Voucher
+app.get("/postdealvoucher", (req, res) => {
+  res.render("post_deal_voucher");
+});
+
+// Posts form to create Deal or Voucher
+app.post("/insertoffer", (req, res) => {
+  let title = req.body.title_field;
+  let description = req.body.post_desc_field;
+
+  let new_offer = ` INSERT INTO post (post_title, post_description)
+            VALUES ( '${title}','${description}');`;
+  db.query(new_offer, (err, rowsobject) => {
+    if (err) throw err;
+    res.send(rowsobject);
+  });
+});

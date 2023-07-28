@@ -1,3 +1,4 @@
+<%- include ("header") %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,26 +10,22 @@
 
     <main class="container">
 
-        <% postdata.forEach ( (post)  => { %>
+        <% dealdata.forEach ( (deal)  => { %>
     
         <div class="card">
-            <a href="/alldeals?postid=<%= post.post_id %>"> </a>
-                <div><h3><%= post.title %></h3></div>
-                <div><p><%= post.description  %></p></div>                           
-                <div><p><%= post.voucher_code  %></p></div>                           
-                <div><p><%= post.start_date  %></p></div>                           
-                <div><p><%= post.end_date  %></p></div>                           
-                <div><p><%= post.location  %></p></div>                           
-                <div><p><%= post.redemtion_instructions  %></p></div>                           
-                <div><p><%= post.website_link  %></p></div>                           
-                <div><p><%= post.image_path  %></p></div>                           
-                <div><p><%= post.terms_conditions  %></p></div>                           
-                <div><p><%= post.num_likes  %></p></div>                           
-                <div><p><%= post.num_ratings  %></p></div>                           
-                <div><p><%= post.brand_name %></p></div>              
-                <div><p><%= post.offer_type_name %></p></div>              
-                <div><p><%= post.discount_type %></p></div>              
-                <div><p><%= post.location_type_name %></p></div>
+            <a href="/alldeals?dealid=<%= deal.deal_id %>"> </a>
+                <div><h3><%= deal.title %></h3></div>
+                <div><p><%= deal.description  %></p></div>                           
+                <div><p><%= deal.deal_link  %></p></div>                           
+                <div><p><%= deal.img_path  %></p></div>                           
+                <div><p><%= deal.price  %></p></div>                           
+                <div><p><%= deal.shipping_price  %></p></div>                           
+                <div><p><%= deal.category_id  %></p></div>                           
+                <div><p><%= deal.brand_id  %></p></div>                           
+                <div><p><%= deal.start_date  %></p></div>                           
+                <div><p><%= deal.end_date  %></p></div>                           
+                <div><p><%= deal.local_deal_id  %></p></div>                           
+                <div><p><%= deal.discount_type_id  %></p></div>                           
             </div>
       
            <%  });   %>
@@ -38,4 +35,5 @@
     <a href="/ratings/{{post_id}}">Rate</a>
     <a href="/saves/{{post_id}}">Save</a>
 </body>
+<%- include ("footer") %>
 </html>

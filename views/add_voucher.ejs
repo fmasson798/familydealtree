@@ -1,0 +1,64 @@
+<%- include ("header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post A Deal or Voucher</title>
+</head>
+<body>
+    <main class="container">
+        <h1> Sign Up </h1>
+         
+                    <form action="/insertvoucher" method="post"> 
+                        <input name="vtitle_field" required type="text" placeholder="Title">
+                        <input name="vdescription_field" required type="text" placeholder="Description">
+                        <input name="vlink_field" required type="text" placeholder="Link to website">
+                        <input name="vcode_field" required type="text" placeholder="Voucher Code">
+                        <input name="vterms_field" required type="text" placeholder="Terms and Conditions">
+                        <input name="edate_field" type="date" placeholder="End Date">
+                        
+                       <select name="category_field" required>
+                        <option value="" selected> Select a Category... </option>
+                        <option value="1">Home & Living</option>
+                        <option value="2">Family & Kids</option>
+                        <option value="3">Electronics</option>
+                        <option value="4">Groceries</option>
+                        <option value="5">Sports & Outdoors</option>
+                        <option value="6">Culture & Leisure</option>
+                        <option value="7">Health & Beauty</option>
+                    </select>
+
+                       <select name="brand_field" required>
+                        <option value="" selected> Select a Brand... </option>
+                        <option value="1">Amazon</option>
+                        <option value="2">Ebay</option>
+                        <option value="3">Argos</option>
+                        <option value="4">Boots</option>
+                        <option value="5">Currys</option>
+                        <option value="6">Game</option>
+                        <option value="7">Marks & Spencer</option>
+                        <option value="8">Asda</option>
+                        <option value="9">Sports Direct</option>
+                        <option value="10">he Jewellery Channel</option>
+                        <option value="11">Costco</option>
+                        <option value="12">John Lewis</option>
+                        <option value="13">Zavvi</option>
+                        <option value="14">Bargain Max</option>
+                        <option value=" ">Other</option>
+                    </select>
+                   
+                       <select name="discount_type_field" required>
+                        <option value="" selected> Select what type of discount this deal provides... </option>
+                        <option value="1">Percentage off (%) </option>
+                        <option value="2">Money Off (£) </option>
+                        <option value="3">Free Shipping</option>
+                    </select>
+
+                       <button>Submit</button> <!-- End submit button -->
+                    </form>
+    </div>
+
+</body>
+<%- include ("footer") %>
+</html>

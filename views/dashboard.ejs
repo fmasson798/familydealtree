@@ -1,0 +1,49 @@
+<%- include ("header") %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Deals and Vouchers</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+
+ <header>
+    <a href="\logout">logout</a>
+ </header>
+    <main>
+        <h2>Dashboard</h2>
+        <p>Logged in as: <%= userdata.role  %> </p>
+        <h2> Your Profile </h2>
+
+          <div class="card">
+              <a href="/user?userid=<%= userdata.user_id %>"> </a>
+                  <div><h3><%= userdata.first_name %></h3></div>
+                  <div><h3><%= userdata.last_name %></h3></div>                           
+                  <div><p><%= userdata.user_email %></p></div>
+                  <div><p><%= userdata.user_password %></p></div>              
+                  <div><p><%= userdata.county_name %></p></div>              
+              </div>
+
+        <div>
+            <blockquote>
+              <p>Create a Deal / Voucher</p>
+              <p><a href="/adddeal">Add a Deal</a></p>
+              <p><a href="/addvoucher">Add a Voucher</a></p>
+            </blockquote>
+        </div>
+        <div>
+            <blockquote>
+              <p>Edit a Deal / Voucher</p>
+              <a href="/editdealvoucher">Edit a Deal Or Voucher</a>
+            </blockquote>
+        </div>
+        <div>
+            <blockquote>
+              <p>Delete a Deal / Voucher</p>
+              <a href="/deletedealvoucher">Delete a Deal Or Voucher</a>
+            </blockquote>
+        </div>
+    </main>
+</body>
+<%- include ("footer") %>
+</html>
