@@ -1,17 +1,26 @@
+<%- include ("header") %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rate Post</title>
+    <h1> Rate Deal</h1>
 </head>
 <body>
-    <h1> Rate Post</h1>
-    <form action="/ratings/{{ post_id}}" method="post">
-        <label for="rating">Rate (1-5): </label>
-        <input type="number" name="rating_score" id="rating_score" min="1" max="5">
+    <form action="/ratings/{{ deal_id}}" method="post">
+        
+        <input name="rating_date_field" required type="date" placeholder="Rating date">
+        <input name="rating_score_field" required type="number" min="1" max="5" placeholder="Rate deal / voucher (1-5)">
+        <input name="user_id_field" required type="text" placeholder="User">
+        <input name="deal_id_field" required type="text" placeholder="Deal / voucher">
+        
         <button type="submit"> Submit Rating </button>
-    </form>
+</form>
+
+
+
+
     <a href="/">Back to Post </a>
 </body>
 </html>

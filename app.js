@@ -54,11 +54,6 @@ db.connect((err) => {
      ROUTES  
 **************************/
 
-// Home
-app.get("/", (req, res) => {
-  res.render("home");
-});
-
 // All Deals (Just Deals)
 app.get("/alldeals", (req, res) => {
   let read = `SELECT * FROM deal`
@@ -89,14 +84,15 @@ app.get('/deal', (req, res) => {
   });
 });
 
+
 //All deals A-Z (footer)
 app.get("/alldealsAZ", (req, res) => {
-  let read = `SELECT post.post_title, post.image_path
-              FROM post
-              ORDER BY post.post_title`
-  db.query(read, (err, postdata) => {
+  let read = `SELECT deal.deal_title, deal.img_path
+  FROM deal
+  ORDER BY deal.deal_title`
+  db.query(read, (err, dealdata) => {
     if (err) throw err;
-  res.render("all_deals_AZ",{ postdata } );
+  res.render("all_deals_AZ",{ dealdata } );
 });
 });
 
@@ -132,10 +128,16 @@ app.get('/voucher', (req, res) => {
   });
 });
 
-
 //All vouchers A-Z (footer)
 app.get("/allvouchersAZ", (req, res) => {
-  res.render("all_vouchers_AZ");
+    let read = `SELECT voucher.*, brand.brand_img_path
+                FROM voucher
+                JOIN brand ON voucher.brand_id = brand.brand_id
+                ORDER BY voucher.voucher_title`
+    db.query(read, (err, voucherdata) => {
+      if (err) throw err;
+    res.render("all_vouchers_AZ",{voucherdata} );
+  });
 });
 
 //Login
@@ -161,6 +163,7 @@ app.post('/', (req,res) => {
     }
 });
 });
+
 
 // dashboard
 app.get('/dashboard', (req,res) => {
@@ -198,8 +201,7 @@ app.get("/adddeal", (req, res) => {
   res.render("add_deal");
 });
   
-  // post deal
-
+// post deal
 app.post("/insertdeal", (req, res) => {
   let title = req.body.dtitle_field;
   let description = req.body.ddescription_field;
@@ -249,6 +251,7 @@ app.delete("/deletedeal/:deal_id", (req, res) => {
   });
 });
 
+
 //add voucher
 app.get("/addvoucher", (req, res) => {
   res.render("add_voucher");
@@ -277,9 +280,6 @@ app.post("/insertvoucher", (req, res) => {
   });
 });
 
-// START HERE 28/07/23
-
-
 //edit voucher
 app.get("/editvoucher", (req, res) => {
   res.render("edit_voucher");
@@ -290,7 +290,6 @@ app.get("/deletevoucher", (req, res) => {
   res.render("delete_voucher");
 });
 
- 
 //Logout
 app.get("/logout", (req, res) => {
   res.render("logout");
@@ -303,7 +302,6 @@ req.session.destroy((err) => {
   res.redirect('/');
   })
 })
-
 
 //Sign up
 app.get("/signup", (req, res) => {
@@ -318,7 +316,6 @@ app.post("/insertuser", (req, res) => {
   let last_name = req.body.last_name_field;
   let county_id = req.body.county_field;
   let role = req.body.role_field;
-
 
   let new_user = ` INSERT INTO user (user_email, user_password, 
         first_name, last_name, county_id, role)
@@ -340,13 +337,10 @@ app.get("/ratings", (req, res) => {
   res.render("ratings");
 });
 
-
 // Save a post
 app.get("/saves", (req, res) => {
   res.render("saves");
 });
-
-
 
 // All Categories
 app.get("/allcategories", (req, res) => {
@@ -367,6 +361,19 @@ app.get('/alldealsbycategory', (req, res) => {
   db.query(read, [getid], (err, dealdata) => {
     if (err) throw err;
     res.render('all_deals_by_category', { dealdata });
+  });
+});
+
+// vouchers by category
+app.get('/allvouchersbycategory', (req, res) => {
+  let getid = req.query.c_id;
+  let read = `SELECT *
+              FROM voucher
+              WHERE category_id = ?`;
+
+  db.query(read, [getid], (err, voucherdata) => {
+    if (err) throw err;
+    res.render('all_vouchers_by_category', { voucherdata });
   });
 });
 
@@ -392,8 +399,23 @@ app.get('/alldealsbybrand', (req, res) => {
   });
 });
 
+// vouchers by brand
+app.get('/allvouchersbybrand', (req, res) => {
+  let getid = req.query.b_id;
+  let read = `SELECT *
+              FROM voucher
+              WHERE brand_id = ?`;
 
+  db.query(read, [getid], (err, voucherdata) => {
+    if (err) throw err;
+    res.render('all_vouchers_by_brand', { voucherdata });
+  });
+});
 
+// Home
+app.get("/", (req, res) => {
+  res.render("home");
+});
 
 app.listen(PORT, () => {
   console.log(`listening on http://localhost:${PORT}`);

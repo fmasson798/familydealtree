@@ -4,22 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Deals A-Z</title>
+    <h3> All Deals </h3>
 </head>
+
 <body>
     <main class="container">
 
-        <% postdata.forEach ( (post)  => { %>
+        <% dealdata.forEach ( (deal)  => { %>
 
         <div class="card">
-            <a href="/post?postid=<%= post.post_id %>"> </a>
-                <div><h3><%= post.post_title %></h3></div>
-                <div><p><img src="<%= post.image_path %>"></p></div>
+            <a href="/deal?d_id=<%= deal.deal_id %>">
+                <div><h3><%= deal.deal_title %></h3></div>
+                <img class="card-img-top" src="<%= deal.img_path %>" alt="Card image cap"></a>
+                <p> £ <%= deal.price %> </p>
 
             </div>
       
            <%  });   %>
     </main>
 </body>
+ 
 <%- include ("footer") %>
 </html>
