@@ -111,7 +111,7 @@ app.get("/allvouchers", (req, res) => {
 app.get('/voucher', (req, res) => { 
   let getid = req.query.v_id;
   let read = `SELECT voucher.voucher_title,
-  voucher.voucher_desc, voucher.voucher_link, voucher.voucher_code,
+  voucher.voucher_discount, voucher.voucher_link, voucher.voucher_code,
   voucher.voucher_terms, voucher.end_date, category.category_name,
   brand.brand_name, discount_type.discount_type_name, user.user_email
      FROM voucher
@@ -138,6 +138,30 @@ app.get("/allvouchersAZ", (req, res) => {
       if (err) throw err;
     res.render("all_vouchers_AZ",{voucherdata} );
   });
+});
+
+//all vouchers by discount value Ascending Order
+app.get("/allvouchersbydiscountvalueasc", (req, res) => {
+  let read = `SELECT voucher.*, brand.brand_img_path
+  FROM voucher
+  JOIN brand ON voucher.brand_id = brand.brand_id
+  ORDER BY voucher.voucher_discount ASC`
+  db.query(read, (err, voucherdata) => {
+    if (err) throw err;
+  res.render("all_vouchers_by_discount_value_asc",{voucherdata} );
+});
+});
+
+//all vouchers by discount value Descending Order
+app.get("/allvouchersbydiscountvaluedesc", (req, res) => {
+  let read = `SELECT voucher.*, brand.brand_img_path
+  FROM voucher
+  JOIN brand ON voucher.brand_id = brand.brand_id
+  ORDER BY voucher.voucher_discount DESC`
+  db.query(read, (err, voucherdata) => {
+    if (err) throw err;
+  res.render("all_vouchers_by_discount_value_desc",{voucherdata} );
+});
 });
 
 //Login
@@ -260,7 +284,7 @@ app.get("/addvoucher", (req, res) => {
 // post voucher
 app.post("/insertvoucher", (req, res) => {
   let title = req.body.vtitle_field;
-  let description = req.body.vdescription_field;
+  let discountvalue = req.body.vdiscountvalue_field;
   let link = req.body.vlink_field;
   let code = req.body.vcode_field;
   let terms = req.body.vterms_field;
@@ -269,10 +293,10 @@ app.post("/insertvoucher", (req, res) => {
   let brand = req.body.brand_field;
   let discounttype = req.body.discount_type_field;
 
-  let new_voucher = ` INSERT INTO voucher (voucher_title, voucher_desc,
+  let new_voucher = ` INSERT INTO voucher (voucher_title, voucher_discount,
                       voucher_link, voucher_code, voucher_terms,
                        end_date, category_id, brand_id, discount_type_id)
-                        VALUES ( '${title}','${description}','${link}','${code}'
+                        VALUES ( '${title}','${discountvalue}','${link}','${code}'
                        ,'${terms}', '${edate}','${category}','${brand}','${discounttype}');`;
   db.query(new_voucher, (err, rowsobject) => {
     if (err) throw err;
@@ -364,6 +388,19 @@ app.get('/alldealsbycategory', (req, res) => {
   });
 });
 
+// deals by location
+app.get('/alldealsbylocaldeal', (req, res) => {
+  let getid = req.query.l_id;
+  let read = `SELECT *
+              FROM deal
+              WHERE local_deal_id = ?`;
+
+  db.query(read, [getid], (err, dealdata) => {
+    if (err) throw err;
+    res.render('all_deals_by_local_deal', { dealdata });
+  });
+});
+
 // vouchers by category
 app.get('/allvouchersbycategory', (req, res) => {
   let getid = req.query.c_id;
@@ -409,6 +446,15 @@ app.get('/allvouchersbybrand', (req, res) => {
   db.query(read, [getid], (err, voucherdata) => {
     if (err) throw err;
     res.render('all_vouchers_by_brand', { voucherdata });
+  });
+});
+
+// All local deals (locations)
+app.get("/localdeal", (req, res) => {
+  let read = ` SELECT * FROM local_deal` 
+  db.query(read, (err, localdealdata) => {
+    if (err) throw err;
+    res.render("local_deal", {localdealdata});
   });
 });
 

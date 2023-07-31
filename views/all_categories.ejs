@@ -14,14 +14,14 @@
         <div class="card">
 
             <div class="card">
-                <a href="/alldealsbycategory?c_id=<%= category.category_id %>"><h1> Deals in this Category</h1></a>
-                <a href="/allvouchersbycategory?c_id=<%= category.category_id %>"><h1> Vouchers in this Category</h1></a> 
-
-            
-            <a href="/alldealsbycategory?c_id=<%= category.category_id %>">                 
                 <div><h3><%= category.category_name %></h3></div></a>
                 <img class="card-img-top" src="<%= category.category_img_path %>" alt="Card image cap"><br>
                 <p> <%= category.category_description %> </p>
+                <a href="/alldealsbycategory?c_id=<%= category.category_id %>"><h5> Deals in this Category</h5></a>
+                <a href="/allvouchersbycategory?c_id=<%= category.category_id %>"><h5> Vouchers in this Category</h5></a> 
+
+            
+            <a href="/alldealsbycategory?c_id=<%= category.category_id %>"></a>                 
 
 
             </div>

@@ -1,0 +1,25 @@
+<%- include ("header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h3> Locations</h3>
+</head>
+<body>
+
+      <main class="container">
+
+        <% localdealdata.forEach((local_deal) => { %>
+
+            <div class="card">
+                <h1><%= local_deal.local_deal_name %></h1>
+                <a href="/alldealsbylocaldeal?l_id=<%= local_deal.local_deal_id %>"><p> Deals in this Location</p></a>    
+                <a href="/alldealsbylocaldeal?l_id=<%= local_deal.local_deal_id %>"></a>
+                
+          
+               <%  });   %>
+        </main>
+</body>
+<%- include ("footer") %>
+</html>

@@ -13,11 +13,11 @@
         <% branddata.forEach(brand => { %>
 
         <div class="card">
+            <img class="card-img-top" src="<%= brand.brand_img_path %>" alt="Card image cap"></a>
             <a href="/alldealsbybrand?b_id=<%= brand.brand_id %>"><h1> Deals in this Brand</h1></a>
             <a href="/allvouchersbybrand?b_id=<%= brand.brand_id %>"><h1> Vouchers in this Brand</h1></a>
 
             <a href="/alldealsbybrand?b_id=<%= brand.brand_id %>">
-                <img class="card-img-top" src="<%= brand.brand_img_path %>" alt="Card image cap"></a>
             </div>
       
            <%  });   %>
