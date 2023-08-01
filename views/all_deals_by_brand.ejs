@@ -1,29 +1,37 @@
 <%- include ("header") %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h3> All Deals </h3>
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<body>
-    <main class="container">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <h3> All Deals </h3>
+    </head>
 
-        <% dealdata.forEach ( (deal)  => { %>
+    <body>
+        <main class="container">
 
-        <div class="card">
-            <a href="/deal?d_id=<%= deal.deal_id %>">
-                <div><h3><%= deal.deal_title %></h3></div>
-                <img class="card-img-top" src="<%= deal.img_path %>" alt="Card image cap"></a>
-                <p> £ <%= deal.price %> </p>
+            <% dealdata.forEach ( (deal)=> { %>
 
-            </div>
-      
-           <%  });   %>
-    </main>
+                <div class="card">
+                    <a href="/deal?d_id=<%= deal.deal_id %>">
+                        <div>
+                            <h3>
+                                <%= deal.deal_title %>
+                            </h3>
+                        </div>
+                        <img class="card-img-top" src="<%= deal.img_path %>" alt="Card image cap">
+                    </a>
+                    <p> £ <%= deal.price %>
+                    </p>
 
-</body>
+                </div>
 
-<%- include ("footer") %>
-</html>
+                <% }); %>
+        </main>
+
+    </body>
+
+    <%- include ("footer") %>
+
+    </html>

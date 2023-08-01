@@ -238,3 +238,42 @@ app.post("/insertdeal", (req, res) => {
     res.redirect('/dashboard');
   });
 });
+
+
+
+
+
+async function hashPassword(user_password){
+  try {
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(user_password, salt);
+    return hash;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// post form to sign up
+app.post("/insertuser", async (req, res) => {
+  let email = req.body.email_field;
+  let userpassword = req.body.upassword_field;
+  let first_name = req.body.first_name_field;
+  let last_name = req.body.last_name_field;
+  let county_id = req.body.county_field;
+  let role = req.body.role_field;
+
+    try {
+      // Hash the user password
+      const hashedPassword = await bcrypt.hash(userpassword, 10);
+  
+      let new_user = `INSERT INTO user (user_email, user_password, first_name, last_name, county_id, role)
+        VALUES ('${email}', '${hashedPassword}', '${first_name}', '${last_name}', '${county_id}', '${role}');`;
+  
+      db.query(new_user, (err, rowsobject) => {
+        if (err) throw err;
+        res.redirect('/dashboard');
+      });
+} catch (error) {
+  console.error("Error hashing password:", error)
+}
+});

@@ -1,60 +1,60 @@
 <%- include ("header") %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Deals and Vouchers</title>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-</head>
-<body>
+  <!DOCTYPE html>
+  <html>
+  <main>
+    <h2>Dashboard</h2>
+    <p>Logged in as: <%= userdata.role %>
+    </p>
+    <h2> Your Profile </h2>
 
- <header>
-    <a href="\logout">logout</a>
- </header>
-    <main>
-        <h2>Dashboard</h2>
-        <p>Logged in as: <%= userdata.role  %> </p>
-        <h2> Your Profile </h2>
+    <div class="card">
+      <a href="/user?userid=<%= userdata.user_id %>"> </a>
+      <div>Name : <%= userdata.first_name %>
+          <%= userdata.last_name %>
+      </div>
+      <div>Email : <%= userdata.user_email %>
+      </div>
+    </div>
 
-          <div class="card">
-              <a href="/user?userid=<%= userdata.user_id %>"> </a>
-                  <div><h3><%= userdata.first_name %> <%= userdata.last_name %></h3></div>
-                  <div><p><%= userdata.user_email %></p></div>
-                  <div><p><%= userdata.user_password %></p></div>              
-                  <div><p><%= userdata.county_name %></p></div>              
-              </div>
-
-        <div>
-            <blockquote>
-              <p>Create a Deal / Voucher</p>
-              <p><a href="/adddeal">Add a Deal</a></p>
-              <p><a href="/addvoucher">Add a Voucher</a></p>
-            </blockquote>
-        </div>
-        <div>
-          <blockquote>
-            <p>Create a Deal / Voucher</p>
-            <p><a href="/editdeal">Edit a Deal</a></p>
-            <p><a href="/editvoucher">Edit a Voucher</a></p>
-          </blockquote>
-        </div>
-        <div>
-          <blockquote>
-            <p>Create a Deal / Voucher</p>
-            <p><a href="/deletedeal">Delete a Deal</a></p>
-            <p><a href="/deletevoucher">Delete a Voucher</a></p>
-          </blockquote>
-        </div>
-    </main>
-
-
-    <li><a href="/ratings">Rate a Deal or Voucher</a></li>
-    <li><a href="/likes">Like a Deal or Voucher</a></li>
-    <li><a href="/saves">Save a Deal or Voucher</a></li>
+    <div>
+      <blockquote>
+        <h3>Create a Deal / Voucher</h3>
+        <p><a href="/adddeal">Add a Deal</a></p>
+        <p><a href="/addvoucher">Add a Voucher</a></p>
+      </blockquote>
+    </div>
+    <div>
+      <blockquote>
+        <h3>Delete a Deal / Voucher</h3>
+        <p><a href="/deletedeal">Delete a Deal</a></p>
+        <p><a href="/deletevoucher">Delete a Voucher</a></p>
+      </blockquote>
+    </div>
+    <blockquote>
+      <h3>Your Stuff</h3>
+      <p><a href="/deletedeal">Your Deals</a></p>
+      <p><a href="/deletevoucher">Your Vouchers</a></p>
+      <p><a href="/deletedeal">Saved Deals</a></p>
+      <p><a href="/deletevoucher">Saved Vouchers</a></p>
+    </blockquote>
+    </div>
 
 
 
 
+  </main>
 
-</body>
-<%- include ("footer") %>
-</html>
+
+  <li><a href="/ratings">Rate a Deal or Voucher</a></li>
+  <li><a href="/likes">Like a Deal or Voucher</a></li>
+  <li><a href="/saves">Save a Deal or Voucher</a></li>
+
+
+
+  <a href="\logout">logout</a>
+
+
+  </body>
+  <%- include ("footer") %>
+
+  </html>

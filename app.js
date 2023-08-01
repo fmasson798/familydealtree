@@ -12,12 +12,14 @@ const oneHour = 1000 * 60 * 60 * 1;
 
 app.use(cookieParser());
 
-app.use(sessions({
+app.use(
+  sessions({
     secret: "myshows14385899",
     saveUninitialized: true,
     cookie: { maxAge: oneHour },
     resave: false,
-  }));
+  })
+);
 
 app.use(express.static("/public"));
 
@@ -43,29 +45,20 @@ db.connect((err) => {
 });
 
 /************************ 
- ADVICE FROM JOHN:
- **************************/
-
-// shorten forms
-// get one part working before adding the rest
-// you don't need to include data you dont intend to use e.g.  dob on user page
-
-/************************ 
      ROUTES  
 **************************/
 
 // All Deals (Just Deals)
 app.get("/alldeals", (req, res) => {
-  let read = `SELECT * FROM deal`
+  let read = `SELECT * FROM deal`;
   db.query(read, (err, dealdata) => {
     if (err) throw err;
-  res.render("all_deals",{dealdata} );
-});
+    res.render("all_deals", { dealdata });
+  });
 });
 
 //Individual Deal
-app.get('/deal', (req, res) => { 
-
+app.get("/deal", (req, res) => {
   let getid = req.query.d_id;
   let read = `SELECT deal.deal_title, deal.deal_desc, deal.deal_link, deal.img_path, deal.price, deal.shipping_price,
             category.category_name, brand.brand_name, deal.start_date, deal.end_date, local_deal.local_deal_name, discount_type.discount_type_name, user.user_email
@@ -75,40 +68,38 @@ app.get('/deal', (req, res) => {
             JOIN local_deal ON deal.local_deal_id = local_deal.local_deal_id
             JOIN discount_type ON deal.discount_type_id = discount_type.discount_type_id
             JOIN user ON deal.user_id = user.user_id
-            WHERE deal.deal_id= ?;`
+            WHERE deal.deal_id= ?;`;
 
-  
-  db.query(read, [getid], (err, dealdata) => { 
-      if(err) throw err;
-      res.render('deal', {dealdata});
+  db.query(read, [getid], (err, dealdata) => {
+    if (err) throw err;
+    res.render("deal", { dealdata });
   });
 });
-
 
 //All deals A-Z (footer)
 app.get("/alldealsAZ", (req, res) => {
   let read = `SELECT deal.deal_title, deal.img_path
   FROM deal
-  ORDER BY deal.deal_title`
+  ORDER BY deal.deal_title`;
   db.query(read, (err, dealdata) => {
     if (err) throw err;
-  res.render("all_deals_AZ",{ dealdata } );
-});
+    res.render("all_deals_AZ", { dealdata });
+  });
 });
 
 //All vouchers
 app.get("/allvouchers", (req, res) => {
   let read = `SELECT voucher.*, brand.brand_img_path
               FROM voucher
-              JOIN brand ON voucher.brand_id = brand.brand_id`
+              JOIN brand ON voucher.brand_id = brand.brand_id`;
   db.query(read, (err, voucherdata) => {
     if (err) throw err;
-  res.render("all_vouchers",{voucherdata} );
-});
+    res.render("all_vouchers", { voucherdata });
+  });
 });
 
 //Individual Voucher
-app.get('/voucher', (req, res) => { 
+app.get("/voucher", (req, res) => {
   let getid = req.query.v_id;
   let read = `SELECT voucher.voucher_title,
   voucher.voucher_discount, voucher.voucher_link, voucher.voucher_code,
@@ -120,23 +111,23 @@ app.get('/voucher', (req, res) => {
     JOIN discount_type ON voucher.discount_type_id = discount_type.discount_type_id
     JOIN user ON voucher.user_id = user.user_id
 
-    WHERE voucher.voucher_id= ?;`
+    WHERE voucher.voucher_id= ?;`;
 
-  db.query(read, [getid], (err, voucherdata) => { 
-      if(err) throw err;
-      res.render('voucher', {voucherdata});
+  db.query(read, [getid], (err, voucherdata) => {
+    if (err) throw err;
+    res.render("voucher", { voucherdata });
   });
 });
 
 //All vouchers A-Z (footer)
 app.get("/allvouchersAZ", (req, res) => {
-    let read = `SELECT voucher.*, brand.brand_img_path
+  let read = `SELECT voucher.*, brand.brand_img_path
                 FROM voucher
                 JOIN brand ON voucher.brand_id = brand.brand_id
-                ORDER BY voucher.voucher_title`
-    db.query(read, (err, voucherdata) => {
-      if (err) throw err;
-    res.render("all_vouchers_AZ",{voucherdata} );
+                ORDER BY voucher.voucher_title`;
+  db.query(read, (err, voucherdata) => {
+    if (err) throw err;
+    res.render("all_vouchers_AZ", { voucherdata });
   });
 });
 
@@ -145,11 +136,11 @@ app.get("/allvouchersbydiscountvalueasc", (req, res) => {
   let read = `SELECT voucher.*, brand.brand_img_path
   FROM voucher
   JOIN brand ON voucher.brand_id = brand.brand_id
-  ORDER BY voucher.voucher_discount ASC`
+  ORDER BY voucher.voucher_discount ASC`;
   db.query(read, (err, voucherdata) => {
     if (err) throw err;
-  res.render("all_vouchers_by_discount_value_asc",{voucherdata} );
-});
+    res.render("all_vouchers_by_discount_value_asc", { voucherdata });
+  });
 });
 
 //all vouchers by discount value Descending Order
@@ -157,11 +148,11 @@ app.get("/allvouchersbydiscountvaluedesc", (req, res) => {
   let read = `SELECT voucher.*, brand.brand_img_path
   FROM voucher
   JOIN brand ON voucher.brand_id = brand.brand_id
-  ORDER BY voucher.voucher_discount DESC`
+  ORDER BY voucher.voucher_discount DESC`;
   db.query(read, (err, voucherdata) => {
     if (err) throw err;
-  res.render("all_vouchers_by_discount_value_desc",{voucherdata} );
-});
+    res.render("all_vouchers_by_discount_value_desc", { voucherdata });
+  });
 });
 
 //Login
@@ -170,38 +161,38 @@ app.get("/login", (req, res) => {
 });
 
 // post login
-app.post('/', (req,res) => {
+app.post("/", (req, res) => {
   let useremail = req.body.emailField;
   let userpassword = req.body.passwordField;
-  let checkuser = 'SELECT * FROM user WHERE user_email = ? AND user_password = ?';
-  
-  db.query(checkuser, [useremail, userpassword], (err, rows)=>{
-    if(err) throw err;
-    let numRows = rows.length;
-    if(numRows > 0){
-        let sessionobj = req.session;  
-        sessionobj.authen = rows[0].user_id; 
-        res.redirect('/dashboard');
-    }else{
-        res.redirect('/');
-    }
-});
-});
+  let checkuser =
+    "SELECT * FROM user WHERE user_email = ? AND user_password = ?";
 
+  db.query(checkuser, [useremail, userpassword], (err, rows) => {
+    if (err) throw err;
+    let numRows = rows.length;
+    if (numRows > 0) {
+      let sessionobj = req.session;
+      sessionobj.authen = rows[0].user_id;
+      res.redirect("/dashboard");
+    } else {
+      res.redirect("/");
+    }
+  });
+});
 
 // dashboard
-app.get('/dashboard', (req,res) => {
+app.get("/dashboard", (req, res) => {
   let sessionobj = req.session;
-  if(sessionobj.authen){
-  let u_id = sessionobj.authen;
-  let user = 'SELECT * FROM user WHERE user_id = ?';
-  db.query(user, [u_id], (err, row)=>{ 
-    let firstrow = row[0];
-    res.render('dashboard', {userdata:firstrow});
-  });
-     }else{
-    res.redirect('/login');
-     } 
+  if (sessionobj.authen) {
+    let u_id = sessionobj.authen;
+    let user = "SELECT * FROM user WHERE user_id = ?";
+    db.query(user, [u_id], (err, row) => {
+      let firstrow = row[0];
+      res.render("dashboard", { userdata: firstrow });
+    });
+  } else {
+    res.redirect("/login");
+  }
 });
 
 app.get("/dashboard", (req, res) => {
@@ -224,7 +215,7 @@ app.get("/dashboard", (req, res) => {
 app.get("/adddeal", (req, res) => {
   res.render("add_deal");
 });
-  
+
 // post deal
 app.post("/insertdeal", (req, res) => {
   let title = req.body.dtitle_field;
@@ -250,7 +241,7 @@ app.post("/insertdeal", (req, res) => {
             ,'${enddate}','${localdeal}','${discounttype}','${dealuser}');`;
   db.query(new_deal, (err, rowsobject) => {
     if (err) throw err;
-    res.redirect('/dashboard');
+    res.redirect("/dashboard");
   });
 });
 
@@ -267,14 +258,12 @@ app.get("/deletedeal", (req, res) => {
 //delete the deal
 app.delete("/deletedeal/:deal_id", (req, res) => {
   const delete_id = req.params.deal_id;
-  db.query(`delete from deal where deal_id=?`, delete_id,  
-   (err, rowsobject) => {
+  db.query(`delete from deal where deal_id=?`, delete_id, (err, rowsobject) => {
     if (err) throw err;
     res.send("The deal has been deleted");
     console.log(rowsobject);
   });
 });
-
 
 //add voucher
 app.get("/addvoucher", (req, res) => {
@@ -300,7 +289,7 @@ app.post("/insertvoucher", (req, res) => {
                        ,'${terms}', '${edate}','${category}','${brand}','${discounttype}');`;
   db.query(new_voucher, (err, rowsobject) => {
     if (err) throw err;
-    res.redirect('/dashboard');
+    res.redirect("/dashboard");
   });
 });
 
@@ -321,11 +310,11 @@ app.get("/logout", (req, res) => {
 
 //post logout
 app.post("/logout", (req, res) => {
-req.session.destroy((err) => {
-  if(err) throw err;
-  res.redirect('/');
-  })
-})
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect("/");
+  });
+});
 
 //Sign up
 app.get("/signup", (req, res) => {
@@ -347,13 +336,13 @@ app.post("/insertuser", (req, res) => {
             ,'${county_id}', '${role}');`;
   db.query(new_user, (err, rowsobject) => {
     if (err) throw err;
-    res.redirect('/dashboard');
+    res.redirect("/dashboard");
   });
 });
 
 // route to like a post
 app.get("/likes", (req, res) => {
-  res.render("likes", { post_id });
+  res.render("likes");
 });
 
 // Rate a post
@@ -368,15 +357,15 @@ app.get("/saves", (req, res) => {
 
 // All Categories
 app.get("/allcategories", (req, res) => {
-  let read = ` SELECT * FROM category` 
+  let read = ` SELECT * FROM category`;
   db.query(read, (err, categorydata) => {
     if (err) throw err;
-    res.render("all_categories", {categorydata});
+    res.render("all_categories", { categorydata });
   });
 });
 
 // deals by category
-app.get('/alldealsbycategory', (req, res) => {
+app.get("/alldealsbycategory", (req, res) => {
   let getid = req.query.c_id;
   let read = `SELECT *
               FROM deal
@@ -384,12 +373,12 @@ app.get('/alldealsbycategory', (req, res) => {
 
   db.query(read, [getid], (err, dealdata) => {
     if (err) throw err;
-    res.render('all_deals_by_category', { dealdata });
+    res.render("all_deals_by_category", { dealdata });
   });
 });
 
 // deals by location
-app.get('/alldealsbylocaldeal', (req, res) => {
+app.get("/alldealsbylocaldeal", (req, res) => {
   let getid = req.query.l_id;
   let read = `SELECT *
               FROM deal
@@ -397,12 +386,12 @@ app.get('/alldealsbylocaldeal', (req, res) => {
 
   db.query(read, [getid], (err, dealdata) => {
     if (err) throw err;
-    res.render('all_deals_by_local_deal', { dealdata });
+    res.render("all_deals_by_local_deal", { dealdata });
   });
 });
 
 // vouchers by category
-app.get('/allvouchersbycategory', (req, res) => {
+app.get("/allvouchersbycategory", (req, res) => {
   let getid = req.query.c_id;
   let read = `SELECT *
               FROM voucher
@@ -410,21 +399,21 @@ app.get('/allvouchersbycategory', (req, res) => {
 
   db.query(read, [getid], (err, voucherdata) => {
     if (err) throw err;
-    res.render('all_vouchers_by_category', { voucherdata });
+    res.render("all_vouchers_by_category", { voucherdata });
   });
 });
 
 // All brands
 app.get("/allbrands", (req, res) => {
-  let read = ` SELECT * FROM brand` 
+  let read = ` SELECT * FROM brand`;
   db.query(read, (err, branddata) => {
     if (err) throw err;
-    res.render("all_brands", {branddata});
+    res.render("all_brands", { branddata });
   });
 });
 
 // deals by brand
-app.get('/alldealsbybrand', (req, res) => {
+app.get("/alldealsbybrand", (req, res) => {
   let getid = req.query.b_id;
   let read = `SELECT *
               FROM deal
@@ -432,12 +421,12 @@ app.get('/alldealsbybrand', (req, res) => {
 
   db.query(read, [getid], (err, dealdata) => {
     if (err) throw err;
-    res.render('all_deals_by_brand', { dealdata });
+    res.render("all_deals_by_brand", { dealdata });
   });
 });
 
 // vouchers by brand
-app.get('/allvouchersbybrand', (req, res) => {
+app.get("/allvouchersbybrand", (req, res) => {
   let getid = req.query.b_id;
   let read = `SELECT *
               FROM voucher
@@ -445,16 +434,16 @@ app.get('/allvouchersbybrand', (req, res) => {
 
   db.query(read, [getid], (err, voucherdata) => {
     if (err) throw err;
-    res.render('all_vouchers_by_brand', { voucherdata });
+    res.render("all_vouchers_by_brand", { voucherdata });
   });
 });
 
 // All local deals (locations)
 app.get("/localdeal", (req, res) => {
-  let read = ` SELECT * FROM local_deal` 
+  let read = ` SELECT * FROM local_deal`;
   db.query(read, (err, localdealdata) => {
     if (err) throw err;
-    res.render("local_deal", {localdealdata});
+    res.render("local_deal", { localdealdata });
   });
 });
 

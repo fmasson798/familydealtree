@@ -1,31 +1,42 @@
 <%- include ("header") %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h3> All Vouchers by Category </h3>
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<body>
-    <main class="container">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <h3> All Vouchers by Category </h3>
+    </head>
 
-        <% voucherdata.forEach ( (voucher)  => { %>
+    <body>
+        <main class="container">
 
-            <div class="card">
-                <a href="/voucher?v_id=<%= voucher.voucher_id %>">
-                    <div><h3><%= voucher.voucher_title %></h3></div></a>
-                    <p>  <%= voucher.voucher_discount %> </p>
-                    <p>  <%= voucher.voucher_terms %> </p>
+            <% voucherdata.forEach ( (voucher)=> { %>
 
-    
-    
+                <div class="card">
+                    <a href="/voucher?v_id=<%= voucher.voucher_id %>">
+                        <div>
+                            <h3>
+                                <%= voucher.voucher_title %>
+                            </h3>
+                        </div>
+                    </a>
+                    <p>
+                        <%= voucher.voucher_discount %>
+                    </p>
+                    <p>
+                        <%= voucher.voucher_terms %>
+                    </p>
+
+
+
                 </div>
-          
-               <%  });   %>
 
-    </main>
-</body>
- 
-<%- include ("footer") %>
-</html>
+                <% }); %>
+
+        </main>
+    </body>
+
+    <%- include ("footer") %>
+
+    </html>

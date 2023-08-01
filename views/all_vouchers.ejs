@@ -1,29 +1,41 @@
 <%- include ("header") %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h3> All Vouchers </h3>
-</head>
-<body>
-    <main class="container">
+    <!DOCTYPE html>
+    <html lang="en">
 
-        <% voucherdata.forEach ( (voucher)  => { %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <h3> All Vouchers </h3>
+    </head>
 
-        <div class="card">
-            <a href="/voucher?v_id=<%= voucher.voucher_id %>"> 
-                <img class="card-img-top" src="<%= voucher.brand_img_path %>" alt="Card image cap">
-                <div><h3><%= voucher.voucher_title %></h3></div></a>
-                <p>  <%= voucher.voucher_discount %> </p>
-                <p>  <%= voucher.voucher_terms %> </p>
+    <body>
+        <main class="container">
+
+            <% voucherdata.forEach ( (voucher)=> { %>
+
+                <div class="card">
+                    <a href="/voucher?v_id=<%= voucher.voucher_id %>">
+                        <img class="card-img-top" src="<%= voucher.brand_img_path %>" alt="Card image cap">
+                        <div>
+                            <h3>
+                                <%= voucher.voucher_title %>
+                            </h3>
+                        </div>
+                    </a>
+                    <p>
+                        <%= voucher.voucher_discount %>
+                    </p>
+                    <p>
+                        <%= voucher.voucher_terms %>
+                    </p>
 
 
-            </div>
-      
-           <%  });   %>
-    </main>
-</body>
- 
-<%- include ("footer") %>
-</html>
+                </div>
+
+                <% }); %>
+        </main>
+    </body>
+
+    <%- include ("footer") %>
+
+    </html>

@@ -1,27 +1,34 @@
 <%- include ("header") %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h3> Brands: </h3>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
 
-      <main class="container">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <h3> Brands: </h3>
+    </head>
 
-        <% branddata.forEach(brand => { %>
+    <body>
 
-        <div class="card">
-            <img class="card-img-top" src="<%= brand.brand_img_path %>" alt="Card image cap"></a>
-            <a href="/alldealsbybrand?b_id=<%= brand.brand_id %>"><h1> Deals in this Brand</h1></a>
-            <a href="/allvouchersbybrand?b_id=<%= brand.brand_id %>"><h1> Vouchers in this Brand</h1></a>
+        <main class="container">
 
-            <a href="/alldealsbybrand?b_id=<%= brand.brand_id %>">
-            </div>
-      
-           <%  });   %>
-    </main>
-</body>
-<%- include ("footer") %>
-</html>
+            <% branddata.forEach(brand=> { %>
+
+                <div class="card">
+                    <img class="card-img-top" src="<%= brand.brand_img_path %>" alt="Card image cap"></a>
+                    <a href="/alldealsbybrand?b_id=<%= brand.brand_id %>">
+                        <h1> Deals in this Brand</h1>
+                    </a>
+                    <a href="/allvouchersbybrand?b_id=<%= brand.brand_id %>">
+                        <h1> Vouchers in this Brand</h1>
+                    </a>
+
+                    <a href="/alldealsbybrand?b_id=<%= brand.brand_id %>">
+                </div>
+
+                <% }); %>
+        </main>
+    </body>
+    <%- include ("footer") %>
+
+    </html>

@@ -1,30 +1,40 @@
 <%- include ("header") %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h3> All Vouchers by Discount Value </h3>
-</head>
-<body>
-    <h5><a href="/allvouchersbydiscountvaluedesc">See Vouchers from Highest to Lowest</a></h5>
-    
-    <main class="container">
-        <h3> Low to High: </h3>
+    <!DOCTYPE html>
+    <html lang="en">
 
-        <% voucherdata.forEach ( (voucher)  => { %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <h3> All Vouchers by Discount Value </h3>
+    </head>
 
-        <div class="card">
-            <a href="/voucher?v_id=<%= voucher.voucher_id %>"> 
-                <div><h3><%= voucher.voucher_title %></h3></div></a>
-                <p>  <%= voucher.voucher_terms %> </p>
+    <body>
+        <h5><a href="/allvouchersbydiscountvaluedesc">See Vouchers from Highest to Lowest</a></h5>
+
+        <main class="container">
+            <h3> Low to High: </h3>
+
+            <% voucherdata.forEach ( (voucher)=> { %>
+
+                <div class="card">
+                    <a href="/voucher?v_id=<%= voucher.voucher_id %>">
+                        <div>
+                            <h3>
+                                <%= voucher.voucher_title %>
+                            </h3>
+                        </div>
+                    </a>
+                    <p>
+                        <%= voucher.voucher_terms %>
+                    </p>
 
 
-            </div>
-      
-           <%  });   %>
-    </main>
-</body>
- 
-<%- include ("footer") %>
-</html>
+                </div>
+
+                <% }); %>
+        </main>
+    </body>
+
+    <%- include ("footer") %>
+
+    </html>
